@@ -138,8 +138,9 @@ make export           # Export static site
 # Quality Checks
 make lint             # Run ESLint
 make lint-fix         # Fix linting issues
+make format           # Format code (auto-fix)
 make type-check       # Run TypeScript checks
-make preflight        # Run all quality checks
+make preflight        # Run all quality checks (format + lint + type-check)
 
 # Content
 make add-content      # Show content addition guide

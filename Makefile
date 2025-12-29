@@ -27,6 +27,7 @@ export PUBLIC_DIR
 $(eval $(shell $(ROOT_DIR)/scripts/theme.sh --emit-make 2>/dev/null || echo ""))
 
 # Include modular makefiles
+include make/setup.mk
 include make/dev.mk
 include make/build.mk
 include make/quality.mk
@@ -65,10 +66,10 @@ help: ## Show available commands
 	@echo "✨ QUALITY & TESTING:"
 	@echo "  lint                Run ESLint"
 	@echo "  lint-fix            Run ESLint with auto-fix"
-	@echo "  format              Format code with Prettier"
+	@echo "  format              Format code (auto-fix)"
 	@echo "  type-check          Run TypeScript type checking"
 	@echo "  test                Run tests"
-	@echo "  preflight           Run all quality checks (lint + type-check)"
+	@echo "  preflight           Run all quality checks (format + lint + type-check)"
 	@echo ""
 	@echo "📝 CONTENT MANAGEMENT:"
 	@echo "  add-content         Show guide for adding new content"
@@ -91,14 +92,7 @@ help: ## Show available commands
 	@echo ""
 
 # Main commands (delegate to sub-makefiles)
-setup: install hooks-install ## Complete project setup
-	@echo ""
-	@echo "✅ Setup complete! Ready to develop."
-	@echo ""
-	@echo "Next steps:"
-	@echo "  • Run: make dev      (start development server)"
-	@echo "  • Visit: http://localhost:3000"
-	@echo ""
+setup: _setup ## Complete project setup
 
 dev: _dev ## Start development server
 
@@ -128,9 +122,9 @@ clean: clean-build clean-cache ## Remove build artifacts and cache
 	@echo "✅ Clean complete"
 
 # Git hooks management
-hooks-install: _hooks-install ## Install git pre-push hooks
+hooks-install: _githook-install ## Install git pre-push hooks
 
-hooks-remove: _hooks-remove ## Remove git hooks
+hooks-remove: _githook-remove ## Remove git hooks
 
 hooks-status: _hooks-status ## Show git hooks status
 

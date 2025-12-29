@@ -126,8 +126,8 @@ export function getAchievements(): Achievement[] {
     return [];
   }
   const fileContents = fs.readFileSync(achievementsPath, 'utf8');
-  const data = JSON.parse(fileContents);
-  return data.map((item: any) => AchievementSchema.parse(item));
+  const data = JSON.parse(fileContents) as unknown[];
+  return data.map((item) => AchievementSchema.parse(item));
 }
 
 // Utility: Get projects by tech slug

@@ -54,9 +54,9 @@ make type-check
 This project uses git hooks to maintain code quality:
 
 **Pre-Push Hook:**
+- Formats code automatically (auto-fix)
 - Runs ESLint to catch code quality issues
 - Runs TypeScript type checking
-- Runs tests (if configured)
 - Prevents pushing if checks fail
 
 **Managing Hooks:**
@@ -106,6 +106,7 @@ Our CI/CD pipeline runs automatically on every PR:
 #### What Gets Checked
 
 ```yaml
+✅ Format (auto-fix code style)
 ✅ ESLint (code quality)
 ✅ TypeScript (type checking)
 ✅ Build (production build)

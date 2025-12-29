@@ -52,7 +52,7 @@ export interface Astro {
 
 export interface Resume {
   content: string;
-  frontmatter?: Record<string, any>;
+  frontmatter?: Record<string, unknown>;
 }
 
 export interface Achievement {

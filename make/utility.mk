@@ -82,6 +82,8 @@ clean-all: ## Remove all generated files and dependencies
 	@rm -rf .turbo
 	@echo "✅ Cleanup complete"
 
-reset: clean-all install ## Fresh install (clean + install)
-	@echo "✅ Reset complete"
+reset: clean-all _setup ## Fresh install (clean + setup)
+	@echo ""
+	@echo "✅ Reset complete - ready to develop!"
+	@echo ""
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Section } from '@/components/ui/Section';
-import { Building2, Calendar, MapPin, ChevronDown } from 'lucide-react';
+import { Building2, Calendar, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 
 export function ExperienceSection() {

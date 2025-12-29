@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
 export function Footer() {
@@ -20,39 +21,39 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/#education" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link href="/#education" className="text-gray-400 hover:text-white text-sm transition-colors">
                   Education
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#experience" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link href="/#experience" className="text-gray-400 hover:text-white text-sm transition-colors">
                   Experience
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#projects" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link href="/#projects" className="text-gray-400 hover:text-white text-sm transition-colors">
                   Projects
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#stack" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link href="/#stack" className="text-gray-400 hover:text-white text-sm transition-colors">
                   Tech Stack
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#achievements" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link href="/#achievements" className="text-gray-400 hover:text-white text-sm transition-colors">
                   Achievements
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#articles" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link href="/#articles" className="text-gray-400 hover:text-white text-sm transition-colors">
                   Articles
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#astro" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link href="/#astro" className="text-gray-400 hover:text-white text-sm transition-colors">
                   Astrophotography
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
