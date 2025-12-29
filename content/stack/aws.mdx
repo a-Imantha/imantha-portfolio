@@ -1,0 +1,85 @@
+---
+name: "AWS"
+slug: "aws"
+category: "Infrastructure"
+description: "Cloud computing platform for scalable infrastructure"
+---
+
+## Why AWS?
+
+AWS provides comprehensive cloud services that enable building scalable, reliable applications. Its breadth of services and maturity make it ideal for production workloads.
+
+## Key Services I Use
+
+### Compute
+- **EKS:** Managed Kubernetes for container orchestration
+- **Lambda:** Serverless compute for event-driven tasks
+- **EC2:** Flexible virtual machines when needed
+
+### Storage
+- **S3:** Object storage for data lakes and backups
+- **EBS:** Block storage for databases
+- **EFS:** Shared file storage for multi-pod access
+
+### Database
+- **RDS:** Managed PostgreSQL and MySQL
+- **ElastiCache:** Redis for caching
+- **DynamoDB:** NoSQL for key-value workloads
+
+### Networking
+- **VPC:** Network isolation and security
+- **ALB/NLB:** Load balancing
+- **CloudFront:** CDN for static assets
+- **Route 53:** DNS management
+
+## My Experience
+
+### ML Platform Infrastructure
+
+Built production ML infrastructure on AWS:
+- **EKS Cluster:** Multi-AZ deployment for high availability
+- **S3 Data Lake:** Centralized storage for training data and models
+- **RDS PostgreSQL:** Feature store and metadata
+- **ElastiCache:** Feature caching for low-latency inference
+- **CloudWatch:** Comprehensive monitoring and alerting
+
+### Architecture Highlights
+
+**Cost Optimization**
+- Spot instances for batch training
+- S3 lifecycle policies for data archival
+- Reserved instances for baseline compute
+- Resource tagging and cost allocation
+
+**Security**
+- VPC with private subnets
+- Security groups and NACLs
+- IAM roles and policies
+- Secrets Manager for credentials
+- CloudTrail for audit logging
+
+**Reliability**
+- Multi-AZ deployments
+- Automated backups
+- CloudWatch alarms
+- Auto-scaling groups
+- Route 53 health checks
+
+## Infrastructure as Code
+
+I use Terraform for managing AWS infrastructure:
+- Version-controlled infrastructure
+- Reproducible environments
+- State management with S3 backend
+- Modular, reusable configurations
+
+## Best Practices
+
+- Follow the Well-Architected Framework
+- Use IAM roles instead of access keys
+- Enable CloudTrail and Config
+- Implement proper tagging strategy
+- Regular security audits
+- Cost monitoring and optimization
+- Multi-region for critical workloads
+

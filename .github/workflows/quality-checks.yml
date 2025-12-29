@@ -1,0 +1,97 @@
+name: Quality Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  quality:
+    name: Code Quality & Type Checking
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: 📦 Install dependencies
+        run: npm ci
+      
+      - name: 🔍 Run ESLint
+        run: npm run lint
+      
+      - name: 🔎 Run TypeScript type checking
+        run: npx tsc --noEmit
+      
+      - name: 📊 Report results
+        if: always()
+        run: |
+          echo "✅ Quality checks complete"
+
+  build:
+    name: Build Verification
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: 📦 Install dependencies
+        run: npm ci
+      
+      - name: 🏗️ Build project
+        run: npm run build
+        env:
+          NEXT_PUBLIC_MEDIUM_RSS_URL: ${{ secrets.MEDIUM_RSS_URL || '' }}
+      
+      - name: 📊 Report build status
+        if: always()
+        run: |
+          echo "✅ Build verification complete"
+
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    if: ${{ false }}  # Disabled until tests are configured
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: 📦 Install dependencies
+        run: npm ci
+      
+      - name: 🧪 Run tests
+        run: npm run test:ci || npm run test
+      
+      - name: 📊 Upload coverage
+        if: always()
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+

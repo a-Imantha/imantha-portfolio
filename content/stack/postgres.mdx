@@ -1,0 +1,66 @@
+---
+name: "PostgreSQL"
+slug: "postgres"
+category: "Database"
+description: "Advanced open-source relational database"
+---
+
+## Why PostgreSQL?
+
+PostgreSQL is my preferred relational database for its robustness, advanced features, and excellent performance. It strikes the perfect balance between SQL standards compliance and practical extensions.
+
+## Key Features
+
+### Advanced Data Types
+PostgreSQL supports rich data types beyond standard SQL:
+- JSONB for flexible document storage
+- Arrays for multi-value columns
+- Range types for temporal data
+- PostGIS for geospatial queries
+
+### Performance
+Excellent performance characteristics:
+- Sophisticated query optimizer
+- Parallel query execution
+- Efficient indexing strategies (B-tree, GiST, GIN, etc.)
+- Connection pooling support
+
+### Reliability
+Production-ready features:
+- ACID compliance
+- Multi-version concurrency control (MVCC)
+- Point-in-time recovery
+- Streaming replication
+- Logical replication for complex topologies
+
+## My Experience
+
+I've leveraged PostgreSQL for:
+- Feature stores in ML platforms
+- High-throughput transactional systems
+- Time-series data storage
+- Full-text search applications
+
+### Notable Implementations
+
+**ML Feature Store**
+- Designed schema for efficient feature retrieval
+- Optimized indexes for sub-10ms queries
+- Partitioning for time-series data
+- Materialized views for aggregations
+
+**Experiment Tracking**
+- JSONB for flexible metadata storage
+- Full-text search on experiment descriptions
+- Complex queries for model comparison
+- Efficient handling of millions of metrics
+
+## Best Practices
+
+- Use appropriate indexes strategically
+- Leverage EXPLAIN ANALYZE for optimization
+- Partition large tables by time or key ranges
+- Use connection pooling (PgBouncer)
+- Regular VACUUM and ANALYZE maintenance
+- Monitor query performance with pg_stat_statements
+

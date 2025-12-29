@@ -1,0 +1,99 @@
+.prose {
+  @apply text-gray-200 leading-relaxed;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply text-white font-semibold mt-8 mb-4;
+}
+
+.prose h1 {
+  @apply text-4xl;
+}
+
+.prose h2 {
+  @apply text-3xl;
+}
+
+.prose h3 {
+  @apply text-2xl;
+}
+
+.prose h4 {
+  @apply text-xl;
+}
+
+.prose p {
+  @apply my-4;
+}
+
+.prose a {
+  @apply text-blue-400 hover:text-blue-300 underline;
+}
+
+.prose ul,
+.prose ol {
+  @apply my-4 ml-6;
+}
+
+.prose ul {
+  @apply list-disc;
+}
+
+.prose ol {
+  @apply list-decimal;
+}
+
+.prose li {
+  @apply my-2;
+}
+
+.prose pre {
+  @apply bg-gray-900 rounded-lg p-4 overflow-x-auto my-4 border border-gray-800;
+}
+
+.prose code {
+  @apply bg-gray-900 text-pink-400 px-1.5 py-0.5 rounded text-sm;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 text-gray-200;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-blue-500 pl-4 italic my-4 text-gray-300;
+}
+
+.prose img {
+  @apply rounded-lg my-6;
+}
+
+.prose table {
+  @apply w-full my-6 border-collapse;
+}
+
+.prose th,
+.prose td {
+  @apply border border-gray-700 px-4 py-2;
+}
+
+.prose th {
+  @apply bg-gray-800 font-semibold;
+}
+
+.prose hr {
+  @apply border-gray-700 my-8;
+}
+
+.prose strong {
+  @apply font-semibold text-white;
+}
+
+.prose em {
+  @apply italic;
+}
+

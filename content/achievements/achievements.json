@@ -1,0 +1,99 @@
+[
+  {
+    "title": "Gold Award (Student Category) - National ICT Awards 2024",
+    "date": "2024-11-01",
+    "description": "Received Gold Award for 'Best Solution Addressing National Disasters' for research on explainable AI for precipitation nowcasting. National-level recognition for innovative application of XAI to disaster preparedness.",
+    "type": "Award",
+    "links": []
+  },
+  {
+    "title": "Publication: Explainable Image Segmentation for Precipitation Nowcasting",
+    "date": "2024-06-01",
+    "description": "First-author research paper under review in Engineering Applications of Artificial Intelligence (Elsevier, Q1 journal). Novel application of Grad-CAM and Integrated Gradients for spatio-temporal meteorological data.",
+    "type": "Publication",
+    "links": []
+  },
+  {
+    "title": "Publication: Fault Diagnosis System for Induction Motors",
+    "date": "2021-07-01",
+    "description": "Published in IESL Journal 'Engineer': 'Predictive and Standalone Fault Diagnosis System for Induction Motors'. Undergraduate capstone research on ML-based predictive maintenance.",
+    "type": "Publication",
+    "links": [
+      {
+        "label": "View Publication",
+        "url": "https://engineer.ieslnet.lk/"
+      }
+    ]
+  },
+  {
+    "title": "MSc Computer Science - GPA 3.9",
+    "date": "2024-01-01",
+    "description": "Completed Master of Science in Computer Science with specialization in Data Science and Machine Learning at University of Moratuwa. Thesis on explainable AI for weather prediction.",
+    "type": "Education",
+    "links": []
+  },
+  {
+    "title": "Oracle Certified Associate - Java SE8 Programmer",
+    "date": "2019-06-01",
+    "description": "Oracle Certified Associate Java SE8 Programmer I (1Z0-808) with score of 82%. Demonstrated proficiency in Java programming fundamentals and object-oriented principles.",
+    "type": "Certification",
+    "links": []
+  },
+  {
+    "title": "HackerRank Gold Badge - Problem Solving",
+    "date": "2021-03-01",
+    "description": "Earned Gold Badge in Problem Solving on HackerRank, demonstrating strong algorithmic and data structure skills.",
+    "type": "Achievement",
+    "links": []
+  },
+  {
+    "title": "Director (Academic Advancement) - IET UOM Chapter",
+    "date": "2019-12-31",
+    "description": "Served as Director of Academic Advancement for the Institution of Engineering and Technology (IET) Student Chapter at University of Moratuwa (2019-2020). Organized technical workshops and industry talks.",
+    "type": "Leadership",
+    "links": []
+  },
+  {
+    "title": "Supervisor (Design Team) - IET UOM Chapter",
+    "date": "2018-12-31",
+    "description": "Led the Design Team as Supervisor for IET Student Chapter (2018-2019). Coordinated branding and promotional materials for chapter events.",
+    "type": "Leadership",
+    "links": []
+  },
+  {
+    "title": "Panelist - AIESEC Colombo South",
+    "date": "2017-12-31",
+    "description": "Served as Panelist for AIESEC Colombo South (2017-2018), contributing to youth leadership development programs.",
+    "type": "Leadership",
+    "links": []
+  },
+  {
+    "title": "Dean's List - Final Semester",
+    "date": "2020-01-01",
+    "description": "Earned Dean's List recognition in final semester of undergraduate studies for academic excellence in Electrical Engineering program.",
+    "type": "Education",
+    "links": []
+  },
+  {
+    "title": "ML Platform Architecture at CML Insights",
+    "date": "2023-12-31",
+    "description": "Architected and deployed end-to-end ML infrastructure serving 4 production applications. Established MLOps best practices with Kubeflow, MLflow, and Kubernetes, enabling rapid model deployment.",
+    "type": "Professional",
+    "links": []
+  },
+  {
+    "title": "Advanced Level - All A Passes",
+    "date": "2014-08-01",
+    "description": "Achieved All A passes in GCE Advanced Level examination (Physical Science stream) at President's College Embilipitiya.",
+    "type": "Education",
+    "links": []
+  },
+  {
+    "title": "Ordinary Level - 9 A Passes",
+    "date": "2011-12-01",
+    "description": "Achieved 9 A passes in GCE Ordinary Level examination at President's College Embilipitiya.",
+    "type": "Education",
+    "links": []
+  }
+]
+

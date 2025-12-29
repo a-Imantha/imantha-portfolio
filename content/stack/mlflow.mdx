@@ -1,0 +1,75 @@
+---
+name: "MLflow"
+slug: "mlflow"
+category: "ML"
+description: "Open-source platform for the complete machine learning lifecycle"
+---
+
+## Why MLflow?
+
+MLflow is my go-to platform for managing the complete ML lifecycle - from experimentation to production deployment. It provides essential tracking, reproducibility, and deployment capabilities without vendor lock-in.
+
+## Core Components
+
+### MLflow Tracking
+- Log parameters, metrics, and artifacts
+- Compare experiments and runs
+- Organize with tags and notes
+- Query API for programmatic access
+
+### MLflow Projects
+- Reproducible ML code packaging
+- Conda/Docker environment specification
+- Git integration for versioning
+- Remote execution capabilities
+
+### MLflow Models
+- Standard model packaging format
+- Multiple framework support
+- Model serving with REST API
+- Model registry for lifecycle management
+
+### MLflow Registry
+- Centralized model store
+- Version management
+- Stage transitions (staging → production)
+- Annotations and descriptions
+
+## My Experience at CML Insights
+
+I've implemented MLflow as the core of our MLOps infrastructure:
+
+**Experiment Tracking**
+- Automated logging from training scripts
+- Custom metrics for business KPIs
+- Artifact storage (models, plots, data samples)
+- Hyperparameter tracking
+
+**Model Registry**
+- Centralized model catalog
+- Approval workflows for production
+- Model lineage and dependencies
+- Performance monitoring
+
+**Deployment Pipeline**
+- Models packaged in MLflow format
+- Automated testing before promotion
+- Kubernetes deployment integration
+- Rollback capabilities
+
+## Integration with Other Tools
+
+- **Kubeflow** for orchestration
+- **Kubernetes** for model serving
+- **PostgreSQL** for backend store
+- **S3** for artifact storage
+- **Grafana** for metrics visualization
+
+## Best Practices
+
+- Consistent logging across all projects
+- Semantic versioning for models
+- Comprehensive artifact storage
+- Automated model validation before promotion
+- Clear model documentation and metadata
+

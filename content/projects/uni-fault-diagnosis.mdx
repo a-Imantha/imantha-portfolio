@@ -1,0 +1,169 @@
+---
+title: "Predictive Fault Diagnosis System for Induction Motors"
+slug: "uni-fault-diagnosis"
+type: "university"
+org: "University of Moratuwa"
+period: "2019 - 2020"
+role: "Undergraduate Capstone Project"
+tech: ["python", "aws"]
+links:
+  - label: "Read Publication"
+    url: "https://engineer.ieslnet.lk/"
+highlights:
+  - "Published in IESL Journal 'Engineer' (2021)"
+  - "Real-time fault detection using machine learning on embedded systems"
+  - "Raspberry Pi-based standalone system with Python/MATLAB backend"
+  - "Java GUI for monitoring and visualization"
+  - "Multi-class fault classification with high accuracy"
+heroImage: "/images/projects/motor-fault-diagnosis.jpg"
+images: []
+techNotes:
+  python: "ML model development and embedded system programming on Raspberry Pi"
+  aws: "Cloud deployment considerations for scaled industrial monitoring"
+---
+
+## Overview
+
+Undergraduate capstone project developing an intelligent, standalone fault diagnosis system for three-phase induction motors. The system uses machine learning to detect and classify motor faults in real-time, enabling predictive maintenance and preventing catastrophic failures.
+
+## Publication
+
+**Title:** "Predictive and Standalone Fault Diagnosis System for Induction Motors"  
+**Journal:** Engineer - Journal of the Institution of Engineers Sri Lanka (IESL)  
+**Year:** 2021  
+**Authors:** Imantha Ahangama et al.
+
+## Motivation
+
+Induction motors are workhorses of industry, but unexpected failures cause:
+- Costly downtime and production losses
+- Safety hazards for workers
+- Damage to connected equipment
+- Expensive emergency repairs
+
+Traditional monitoring requires expert analysis. Our system automates fault detection using ML, making predictive maintenance accessible even to smaller operations.
+
+## System Design
+
+### Hardware Architecture
+**Embedded Platform:** Raspberry Pi 3B+
+- Sufficient processing for real-time ML inference
+- GPIO for sensor interfacing
+- Network connectivity for remote monitoring
+- Cost-effective for industrial deployment
+
+**Sensors:**
+- Current sensors (3-phase)
+- Vibration sensors (accelerometer)
+- Temperature sensors
+- Motor speed encoder
+
+### Software Components
+
+**Data Acquisition:**
+- Real-time sensor data collection
+- Signal conditioning and filtering
+- Sampling at appropriate frequencies
+- Circular buffer for continuous monitoring
+
+**Feature Extraction:**
+- Time-domain features (RMS, peak, crest factor)
+- Frequency-domain analysis (FFT, harmonics)
+- Statistical features (mean, variance, skewness)
+- Motor-specific features (slip, power factor)
+
+**ML Classification:**
+- Multi-class classifier trained on fault signatures
+- MATLAB for model development and validation
+- Python (scikit-learn) for embedded inference
+- Support for various fault types:
+  - Bearing faults
+  - Stator winding faults
+  - Rotor bar faults
+  - Misalignment
+  - Unbalance
+
+**User Interface:**
+- Java Swing desktop application
+- Real-time data visualization
+- Fault alerts and notifications
+- Historical trend analysis
+- System configuration and calibration
+
+## Machine Learning Approach
+
+### Dataset
+- Experimental data from motors with induced faults
+- Simulation data from motor models
+- Balanced dataset across fault classes
+- Multiple operating conditions (load, speed)
+
+### Models Evaluated
+- Support Vector Machines (SVM)
+- Random Forest
+- Neural Networks
+- K-Nearest Neighbors
+
+**Best Performance:** SVM with RBF kernel achieving 95%+ accuracy
+
+### Model Deployment
+- Model serialization for embedded deployment
+- Optimization for Raspberry Pi constraints
+- Inference time < 100ms for real-time operation
+- Periodic retraining capability
+
+## Technical Challenges
+
+**Real-Time Processing**
+- Signal processing on embedded hardware
+- Meeting latency requirements for safety-critical faults
+- Efficient feature computation
+
+**Robustness**
+- Handling noisy industrial environments
+- Adapting to varying motor loads and speeds
+- False positive/negative trade-offs
+
+**Deployment**
+- Standalone operation without cloud dependency
+- Reliability for 24/7 operation
+- Easy installation and commissioning
+
+## Results
+
+### Fault Detection Performance
+- **Accuracy:** 95%+ across all fault types
+- **False Positive Rate:** < 3%
+- **Inference Time:** ~80ms (real-time capable)
+- **Detection Latency:** Faults detected within seconds of onset
+
+### Practical Validation
+- Tested on laboratory test bench
+- Validation with multiple motor sizes (0.5-5 HP)
+- Successful detection of actual bearing failures
+- Comparison with expert diagnosis (high agreement)
+
+## Impact
+
+- **Academic:** Published in peer-reviewed IESL journal
+- **Industrial Interest:** Demonstrations to local manufacturers
+- **Educational:** Case study for ML in embedded systems
+- **Personal Growth:** Deep dive into signal processing, embedded systems, and ML deployment
+
+## Technology Stack
+
+**Hardware:** Raspberry Pi, current sensors, accelerometers, temperature sensors  
+**Embedded:** Python 3, GPIO libraries, threading  
+**ML:** scikit-learn, NumPy, SciPy, MATLAB  
+**Signal Processing:** FFT, digital filters, feature extraction  
+**UI:** Java Swing, JFreeChart  
+**Communication:** MQTT for optional remote monitoring
+
+## Future Enhancements
+
+- Edge ML model retraining based on operational data
+- Integration with industrial IoT platforms
+- Mobile app for maintenance technicians
+- Support for additional motor types
+- Prognostics (remaining useful life estimation)
+

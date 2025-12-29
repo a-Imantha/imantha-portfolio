@@ -1,0 +1,160 @@
+---
+title: "Explainable Image Segmentation for Precipitation Nowcasting"
+slug: "uni-xai-nowcasting"
+type: "university"
+org: "University of Moratuwa"
+period: "2021 - 2024"
+role: "MSc Thesis Research"
+tech: ["python", "pytorch", "nextjs"]
+links:
+  - label: "Hugging Face Demo"
+    url: "https://huggingface.co/spaces/example/nowcasting"
+highlights:
+  - "Gold Award (Student Category) at National ICT Awards 2024 - Solutions Addressing National Disasters"
+  - "Research paper under review in Engineering Applications of Artificial Intelligence (Elsevier)"
+  - "Deployed interactive demo on Hugging Face Spaces"
+  - "Novel application of Grad-CAM and Integrated Gradients for spatio-temporal image data"
+  - "Achieved significant improvements in precipitation forecast accuracy and interpretability"
+heroImage: "/images/projects/xai-nowcasting.png"
+images: []
+techNotes:
+  python: "Core language for data processing, model development, and analysis"
+  pytorch: "Deep learning framework for U-Net and attention-based architectures"
+  nextjs: "Built interactive web application for visualizing predictions and explanations"
+---
+
+## Research Overview
+
+This MSc thesis research addresses the critical need for explainable AI in weather forecasting, specifically focusing on short-term precipitation prediction (nowcasting). While deep learning models achieve impressive accuracy, their black-box nature limits trust and adoption in operational meteorology where lives and property are at stake.
+
+## The Challenge
+
+Traditional numerical weather prediction models are physically grounded but computationally expensive and struggle with very short-term forecasts (0-2 hours). Deep learning models can provide faster, more accurate nowcasts, but meteorologists require understanding of *why* a model makes certain predictions before they can trust and act on them.
+
+## Approach
+
+### Novel XAI Application
+I developed and applied explainability techniques specifically adapted for spatio-temporal multivariate image data:
+
+**Grad-CAM (Gradient-weighted Class Activation Mapping)**
+- Visualizes which spatial regions the model focuses on
+- Adapted for multi-channel meteorological data
+- Provides intuitive heatmaps overlaid on radar images
+
+**Integrated Gradients**
+- Attributes predictions to specific input features
+- Handles temporal sequences of radar scans
+- Quantifies importance of different time steps
+
+**Custom Visualizations**
+- Spatial-temporal attribution maps
+- Feature importance across different precipitation intensities
+- Comparative analysis with physical meteorology principles
+
+### Deep Learning Architecture
+Built on proven architectures with enhancements for interpretability:
+- U-Net based encoder-decoder for image segmentation
+- Attention mechanisms for focusing on relevant features
+- Multi-scale processing for different precipitation patterns
+- Temporal convolutions for motion and evolution
+
+### Dataset & Processing
+- Multi-year dataset of weather radar images
+- Preprocessing pipeline for data cleaning and normalization
+- Handling of class imbalance (precipitation is rare)
+- Train/validation/test splits with temporal considerations
+
+## Key Achievements
+
+### Recognition
+🏆 **Gold Award (Student Category) - National ICT Awards 2024**
+- Category: "Best Solution Addressing National Disasters"
+- Recognized for potential impact on flood early warning systems
+- National-level competition across all ICT domains
+
+### Publication
+📄 **Research Paper Under Review**
+- Title: "Explainable Image Segmentation for Spatio-Temporal and Multivariate Image Data in Precipitation Nowcasting"
+- Journal: Engineering Applications of Artificial Intelligence (Elsevier, Q1)
+- Status: Under review (2024)
+
+### Deployment
+🚀 **Interactive Demo on Hugging Face Spaces**
+- Web application showcasing model capabilities
+- Real-time visualization of predictions and explanations
+- Educational tool for understanding XAI techniques
+- Accessible to researchers and meteorologists worldwide
+
+## Technical Implementation
+
+### Model Development
+**Framework:** PyTorch for flexibility and research-oriented development
+- Custom data loaders for radar image sequences
+- Training pipeline with MLflow for experiment tracking
+- Hyperparameter optimization using Optuna
+- Model checkpointing and early stopping
+
+**Explainability Integration**
+- Post-hoc explanation generation pipeline
+- Efficient computation of attribution maps
+- Batch processing for large-scale evaluation
+- Validation framework for explanation quality
+
+### Web Application
+**Technology:** Next.js for responsive, interactive interface
+- Upload radar sequences or use sample data
+- Real-time model inference
+- Side-by-side comparison of predictions and explanations
+- Interactive controls for exploring different visualization modes
+- Export functionality for figures and results
+
+**Deployment:** Hugging Face Spaces
+- Containerized application with GPU support
+- CI/CD for updates and improvements
+- Analytics for usage and feedback
+
+## Research Contributions
+
+1. **Methodological:** Adapted XAI techniques for spatio-temporal meteorological data
+2. **Practical:** Demonstrated that explanations align with meteorological knowledge
+3. **Impact:** Showed that explainability increases forecaster trust and utility
+4. **Deployment:** Made research accessible through interactive web demo
+
+## Results & Insights
+
+### Model Performance
+- High accuracy on precipitation detection and intensity
+- Improved performance on rare but critical heavy rainfall events
+- Faster inference than numerical models
+- Competitive with or exceeding baseline deep learning models
+
+### Explainability Validation
+- Explanations correlate with known meteorological features
+- Attention maps highlight storm structures and boundaries
+- Temporal attribution shows proper use of motion information
+- Domain experts validated physical plausibility
+
+### Practical Impact
+- Provides meteorologists with confidence in predictions
+- Enables identification of model limitations
+- Supports decision-making for warnings and alerts
+- Educational value for training forecasters
+
+## Technical Stack
+
+**Core ML:** Python, PyTorch, Keras, NumPy, Pandas  
+**Explainability:** Captum (Integrated Gradients), custom Grad-CAM implementation  
+**Visualization:** Matplotlib, Seaborn, Plotly  
+**Data Processing:** xarray, netCDF4, OpenCV  
+**Web App:** Next.js, TypeScript, TailwindCSS  
+**Deployment:** Hugging Face Spaces, Docker  
+**Experiment Tracking:** MLflow, Weights & Biases
+
+## Future Directions
+
+- **Multi-modal integration:** Combine radar with satellite and surface observations
+- **Longer forecast horizons:** Extend from nowcasting to 3-6 hour forecasts
+- **Ensemble methods:** Multiple models with uncertainty quantification
+- **Operational deployment:** Integration with national meteorological services
+- **Transfer learning:** Adapt models to different geographical regions
+

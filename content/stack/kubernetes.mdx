@@ -1,0 +1,79 @@
+---
+name: "Kubernetes"
+slug: "kubernetes"
+category: "Infrastructure"
+description: "Container orchestration for scalable applications"
+---
+
+## Why Kubernetes?
+
+Kubernetes is my platform of choice for deploying and managing containerized applications at scale. It provides powerful abstractions for handling complex distributed systems.
+
+## Key Concepts
+
+### Workload Management
+Kubernetes offers flexible workload types:
+- Deployments for stateless applications
+- StatefulSets for databases and stateful services
+- Jobs and CronJobs for batch processing
+- DaemonSets for node-level services
+
+### Service Discovery & Networking
+Built-in networking capabilities:
+- Services for stable endpoints
+- Ingress for HTTP routing
+- Network policies for security
+- Service mesh integration (Istio, Linkerd)
+
+### Scaling & Resilience
+Automatic scaling and recovery:
+- Horizontal Pod Autoscaling (HPA)
+- Vertical Pod Autoscaling (VPA)
+- Self-healing through health checks
+- Rolling updates and rollbacks
+
+## My Experience
+
+I've built production Kubernetes infrastructure for:
+- ML model serving at scale
+- Microservices architectures
+- Data processing pipelines
+- Multi-tenant applications
+
+### ML Platform on Kubernetes
+
+In my ML platform work, I leveraged Kubernetes for:
+- **Custom Operators:** Built CRDs for model deployment lifecycle
+- **Auto-scaling:** HPA based on inference queue depth
+- **Resource Management:** GPU scheduling and optimization
+- **High Availability:** Multi-zone deployments with 99.9% uptime
+
+### Best Practices
+
+**Resource Management**
+- Set appropriate requests and limits
+- Use resource quotas for namespaces
+- Leverage node affinity and taints
+- Monitor resource utilization
+
+**Security**
+- RBAC for access control
+- Network policies for isolation
+- Pod security policies
+- Secret management with external systems
+
+**Observability**
+- Prometheus for metrics
+- Centralized logging with ELK or Loki
+- Distributed tracing
+- Custom dashboards and alerts
+
+## Tools & Ecosystem
+
+- **Helm:** Package management
+- **ArgoCD:** GitOps deployments
+- **Cert-manager:** TLS certificate automation
+- **Prometheus Operator:** Monitoring
+- **Istio:** Service mesh
+- **Kustomize:** Configuration management
+

@@ -1,0 +1,103 @@
+---
+title: "AWS Security Audit Tool"
+slug: "personal-aws-security-audit"
+type: "personal"
+org: "Personal Project"
+period: "2023"
+role: "Developer"
+tech: ["python", "aws"]
+highlights:
+  - "Serverless security auditing tool for AWS environments"
+  - "Automated scheduled scans with EventBridge"
+  - "Email reports via SES with actionable recommendations"
+  - "Infrastructure-as-code with CloudFormation/SAM"
+links:
+  - label: "View on GitHub"
+    url: "https://github.com/a-Imantha/aws-security-audit"
+heroImage: "/images/projects/ml-platform.png"
+images: []
+techNotes:
+  python: "Lambda functions for security checks and report generation"
+  aws: "Serverless architecture using Lambda, EventBridge, SES, and CloudFormation"
+---
+
+## Overview
+
+A serverless AWS security auditing tool that automatically scans AWS environments for common security misconfigurations and compliance issues. Built to help identify security gaps before they become incidents.
+
+## Features
+
+### Automated Security Checks
+- S3 bucket public access settings
+- IAM policy analysis for overprivileged access
+- Security group rules inspection
+- Unencrypted resources detection
+- CloudTrail logging verification
+- MFA enforcement status
+
+### Scheduled Scanning
+- EventBridge triggers for daily/weekly scans
+- Configurable scan scope (accounts, regions, resources)
+- Incremental scanning for large environments
+- Historical trend tracking
+
+### Reporting
+- Detailed findings with severity levels
+- Actionable remediation steps
+- Summary dashboards
+- Email reports via SES
+- JSON export for integration with other tools
+
+## Architecture
+
+**Serverless Components:**
+- **Lambda Functions:** Security scanning logic in Python
+- **EventBridge:** Scheduled trigger orchestration
+- **SES:** Email notification delivery
+- **S3:** Report storage and audit logs
+- **CloudFormation/SAM:** Infrastructure provisioning
+
+**Security Checks:**
+- Boto3 SDK for AWS API interactions
+- Custom policy analysis engine
+- Compliance framework mapping (CIS, AWS Well-Architected)
+
+## Technical Implementation
+
+### Lambda Functions
+Modular design with separate functions for:
+- Resource discovery and inventory
+- Security rule evaluation
+- Report aggregation and formatting
+- Notification dispatching
+
+### Infrastructure as Code
+Full deployment automation:
+```yaml
+# SAM template defining all resources
+- Lambda functions with appropriate IAM roles
+- EventBridge rules for scheduling
+- S3 buckets with versioning and encryption
+- SES configuration for email delivery
+```
+
+### Cost Optimization
+- Minimal runtime through efficient AWS API calls
+- Incremental scanning to avoid full scans
+- Serverless pricing model (pay per scan)
+- Typical monthly cost: < $5 for small environments
+
+## Impact
+
+- Identified critical security issues in personal AWS accounts
+- Automated compliance checking process
+- Reduced manual audit time from hours to minutes
+- Educational tool for learning AWS security best practices
+
+## Technologies
+
+**Cloud:** AWS Lambda, EventBridge, SES, S3, CloudFormation, SAM  
+**Language:** Python 3.9+  
+**Libraries:** Boto3, Jinja2 (report templates)  
+**Tools:** AWS CLI, SAM CLI
+

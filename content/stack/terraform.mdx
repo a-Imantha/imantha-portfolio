@@ -1,0 +1,136 @@
+---
+name: "Terraform"
+slug: "terraform"
+category: "Infrastructure"
+description: "Infrastructure-as-code for reproducible cloud deployments"
+---
+
+## Why Terraform?
+
+Terraform is my tool of choice for infrastructure-as-code, enabling reproducible, version-controlled infrastructure across multiple cloud providers. It brings software engineering practices to infrastructure management.
+
+## Key Features
+
+### Multi-Cloud Support
+- AWS (primary focus)
+- Azure and GCP support
+- Kubernetes provider
+- Countless third-party providers
+
+### State Management
+- Remote state in S3 with DynamoDB locking
+- Workspaces for environment isolation
+- State file versioning and backup
+- Import existing resources
+
+### Modularity
+- Reusable modules for common patterns
+- Version-controlled module registry
+- Composition and inheritance
+- Variable validation and typing
+
+## My Experience
+
+### CML Insights Infrastructure
+I've built and maintained comprehensive Terraform configurations for:
+
+**AWS Resources**
+- EKS clusters with node groups
+- RDS PostgreSQL instances with read replicas
+- S3 buckets with lifecycle policies
+- IAM roles and policies
+- VPC networking and security groups
+- Application Load Balancers
+- Route 53 DNS records
+
+**Kubernetes Resources**
+- Namespaces and resource quotas
+- Service accounts and RBAC
+- ConfigMaps and Secrets
+- Ingress configurations
+
+**Infrastructure Patterns**
+- Multi-environment setup (dev/staging/prod)
+- Shared services layer
+- Application-specific stacks
+- Disaster recovery configurations
+
+### Best Practices I Follow
+
+**Code Organization**
+```
+terraform/
+├── modules/
+│   ├── eks-cluster/
+│   ├── rds-postgres/
+│   └── s3-bucket/
+├── environments/
+│   ├── dev/
+│   ├── staging/
+│   └── prod/
+└── shared/
+```
+
+**Version Control**
+- Git for all Terraform code
+- Branch protection for production
+- Pull request reviews
+- Automated validation in CI
+
+**State Management**
+- S3 backend with encryption
+- DynamoDB for state locking
+- Separate states per environment
+- Regular state backups
+
+**Security**
+- No hardcoded credentials
+- Use of AWS IAM roles
+- Encrypted sensitive outputs
+- Least privilege principles
+
+## Advanced Techniques
+
+### Dynamic Blocks
+For flexible, repeatable configurations:
+```hcl
+dynamic "rule" {
+  for_each = var.security_rules
+  content {
+    from_port   = rule.value.from_port
+    to_port     = rule.value.to_port
+    protocol    = rule.value.protocol
+    cidr_blocks = rule.value.cidr_blocks
+  }
+}
+```
+
+### Count and For_Each
+Conditional resource creation and iteration
+
+### Data Sources
+Querying existing infrastructure
+
+### Terraform Workspaces
+Environment isolation without code duplication
+
+## Tools & Integrations
+
+- **terragrunt** for DRY configurations
+- **tflint** for linting
+- **terraform-docs** for documentation
+- **Atlantis** for PR-based workflows
+- **Checkov** for security scanning
+- **Infracost** for cost estimation
+
+## CI/CD Integration
+
+Automated Terraform workflows:
+1. `terraform fmt` - Format check
+2. `terraform validate` - Syntax validation
+3. `terraform plan` - Preview changes
+4. Manual approval gate
+5. `terraform apply` - Deploy changes
+6. State file backup
+7. Notification to team
+
