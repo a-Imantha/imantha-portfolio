@@ -36,20 +36,18 @@ const techIcons: Record<string, IconType> = {
 
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [selectedType, setSelectedType] = useState<string | null>(null);
-  const [highlightedTech, setHighlightedTech] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
       const matchesType = !selectedType || project.type === selectedType;
-      const matchesTech = !highlightedTech || project.tech.includes(highlightedTech);
       const matchesSearch =
         !searchQuery ||
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.org.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesType && matchesTech && matchesSearch;
+      return matchesType && matchesSearch;
     });
-  }, [projects, selectedType, highlightedTech, searchQuery]);
+  }, [projects, selectedType, searchQuery]);
 
   return (
     <Section id="projects" title="Projects" className="bg-gray-900">
@@ -112,11 +110,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                 return (
                   <div
                     key={tech}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg transition-all ${
-                      highlightedTech === tech
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-800 text-gray-300 border border-gray-700'
-                    }`}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg transition-all bg-gray-800 text-gray-300 border border-gray-700"
                     title={tech}
                   >
                     {Icon && <Icon className="w-3.5 h-3.5" />}

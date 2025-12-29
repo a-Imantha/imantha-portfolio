@@ -79,10 +79,10 @@ make dev
 |---------|-------------|
 | `make lint` | Run ESLint checks |
 | `make lint-fix` | Auto-fix linting issues |
-| `make format` | Format code with Prettier |
+| `make format` | Format code (auto-fix) |
 | `make type-check` | Run TypeScript type checking |
 | `make test` | Run tests (when configured) |
-| `make preflight` | Run all quality checks |
+| `make preflight` | Run all quality checks (format + lint + type-check) |
 
 ### Content Management
 
@@ -190,9 +190,9 @@ make hooks-remove
 ```
 
 **What the pre-push hook does:**
-1. Runs ESLint to catch code style issues
-2. Runs TypeScript to catch type errors
-3. Runs tests (when configured)
+1. Formats code automatically (auto-fix)
+2. Runs ESLint to catch code style issues
+3. Runs TypeScript to catch type errors
 4. Blocks push if any check fails
 
 **Bypass hook** (not recommended):

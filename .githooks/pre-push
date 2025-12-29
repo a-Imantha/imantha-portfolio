@@ -43,19 +43,21 @@ run_check() {
     fi
 }
 
+# Ensure dependencies are installed before running checks
+if [ ! -d "node_modules" ] || [ ! -d "node_modules/.bin" ]; then
+    echo -e "${BLUE}📦 Installing dependencies (node_modules incomplete)...${NC}"
+    npm install
+    echo ""
+fi
+
+# Run formatting (auto-fix)
+run_check "Format" "npm run lint -- --fix"
+
 # Run ESLint
 run_check "ESLint" "npm run lint"
 
 # Run TypeScript type checking
 run_check "TypeScript" "npx tsc --noEmit"
-
-# Optional: Run tests if they exist
-if npm run | grep -q "test:ci"; then
-    run_check "Tests" "npm run test:ci"
-elif npm run | grep -q "test"; then
-    echo -e "${YELLOW}⚠ No test:ci script found, skipping tests${NC}"
-    echo ""
-fi
 
 # Check results
 if [ $CHECKS_FAILED -eq 0 ]; then

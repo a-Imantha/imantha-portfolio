@@ -5,7 +5,7 @@ import { Prose } from '@/components/ui/Prose';
 import { markdownToHtml } from '@/lib/content/markdown';
 
 export async function ResumeSection() {
-  const resume = getResume();
+  const resume = await getResume();
   const htmlContent = await markdownToHtml(resume.content);
 
   return (

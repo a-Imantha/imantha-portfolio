@@ -183,7 +183,7 @@ export function EducationSection() {
                   <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
                     <h4 className="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-2 flex items-center gap-2">
                       <BookOpen className="w-4 h-4" />
-                      Master's Thesis
+                      Master&apos;s Thesis
                     </h4>
                     <p className="text-sm text-white mb-2 leading-relaxed">{edu.thesis.title}</p>
                     <div className="flex flex-wrap gap-2">

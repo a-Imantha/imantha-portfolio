@@ -1,6 +1,14 @@
 import { XMLParser } from 'fast-xml-parser';
 import type { MediumArticle } from './types';
 
+interface RSSItem {
+  title?: string;
+  link?: string;
+  pubDate?: string;
+  description?: string;
+  'content:encoded'?: string;
+}
+
 export async function fetchMediumArticles(): Promise<MediumArticle[]> {
   const rssUrl = process.env.NEXT_PUBLIC_MEDIUM_RSS_URL;
 
@@ -26,8 +34,8 @@ export async function fetchMediumArticles(): Promise<MediumArticle[]> {
     const items = parsed?.rss?.channel?.item || [];
     const articles = Array.isArray(items) ? items : [items];
 
-    return articles
-      .map((item: any) => ({
+    return (articles as RSSItem[])
+      .map((item) => ({
         title: item.title || '',
         link: item.link || '',
         pubDate: item.pubDate || '',

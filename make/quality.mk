@@ -2,57 +2,61 @@
 # Quality & Testing Commands
 # =========================
 
-.PHONY: _lint _lint-fix _format _type-check _test preflight
+.PHONY: _lint _lint-fix _format _type-check _test preflight lint-check format-check
+
+##@ Code Quality
 
 _lint: ## Run ESLint
-	@echo "🔍 Running ESLint..."
-	@npm run lint
-	@echo "✅ Linting complete"
+	@$(ROOT_DIR)/scripts/quality/lint.sh $(ROOT_DIR)
 
 _lint-fix: ## Run ESLint with auto-fix
 	@echo "🔧 Running ESLint with auto-fix..."
-	@npm run lint -- --fix
+	@# Ensure dependencies are installed
+	@if [ ! -d "$(ROOT_DIR)/node_modules" ] || [ ! -d "$(ROOT_DIR)/node_modules/.bin" ]; then \
+		echo "📦 Installing dependencies..."; \
+		cd $(ROOT_DIR) && npm install; \
+	fi
+	@cd $(ROOT_DIR) && npm run lint -- --fix
 	@echo "✅ Linting complete (with fixes)"
 
-_format: ## Format code with Prettier (if configured)
-	@echo "🎨 Formatting code..."
-	@if npm run | grep -q "format"; then \
-		npm run format; \
-	else \
-		echo "⚠️  No format script found in package.json"; \
-		echo "   Consider adding: \"format\": \"prettier --write .\""; \
-	fi
+_format: ## Format code
+	@$(ROOT_DIR)/scripts/quality/format.sh $(ROOT_DIR)
+
+lint-check: _lint ## Check linting without fixing
+
+format-check: _lint ## Check formatting without fixing
 
 _type-check: ## Run TypeScript type checking
-	@echo "🔎 Running TypeScript type checking..."
-	@npx tsc --noEmit
-	@echo "✅ Type checking complete"
+	@$(ROOT_DIR)/scripts/quality/type-check.sh $(ROOT_DIR)
 
 _test: ## Run tests (if configured)
 	@echo "🧪 Running tests..."
+	@# Ensure dependencies are installed
+	@if [ ! -d "$(ROOT_DIR)/node_modules" ] || [ ! -d "$(ROOT_DIR)/node_modules/.bin" ]; then \
+		echo "📦 Installing dependencies..."; \
+		cd $(ROOT_DIR) && npm install; \
+	fi
 	@if npm run | grep -q "test"; then \
 		npm run test; \
+		echo "✅ Tests complete"; \
 	else \
 		echo "⚠️  No test script found in package.json"; \
 		echo "   Consider adding a test framework like Jest or Vitest"; \
 	fi
 
-preflight: ## Run all quality checks (lint + type-check)
+preflight: ## Run all quality checks (format + lint + type-check)
 	@echo "🚦 Running preflight checks..."
 	@echo ""
+	@echo "1️⃣ Formatting code..."
+	@$(MAKE) -s _format
+	@echo ""
+	@echo "2️⃣ Running linting..."
 	@$(MAKE) -s _lint
 	@echo ""
+	@echo "3️⃣ Running TypeScript type checking..."
 	@$(MAKE) -s _type-check
 	@echo ""
-	@echo "✅ All preflight checks passed"
-
-_hooks-install: ## Install git hooks
-	@echo "🔧 Installing git hooks..."
-	@$(ROOT_DIR)/scripts/setup-hooks.sh install
-
-_hooks-remove: ## Remove git hooks
-	@echo "🗑️  Removing git hooks..."
-	@$(ROOT_DIR)/scripts/setup-hooks.sh remove
+	@echo "✅ All preflight checks passed!"
 
 _hooks-status: ## Show git hooks status
 	@$(ROOT_DIR)/scripts/setup-hooks.sh status

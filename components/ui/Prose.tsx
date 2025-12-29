@@ -29,6 +29,7 @@ export const mdxComponents = {
   },
   InlineImage: ({ src, alt }: { src: string; alt: string }) => (
     <span className="inline-block mx-1">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt} className="inline-block h-6 w-auto" />
     </span>
   ),

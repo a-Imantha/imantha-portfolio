@@ -13,8 +13,6 @@ import {
   SiPytorch,
   SiPython,
   SiTerraform,
-  SiGrafana,
-  SiDocker,
   SiGithubactions
 } from 'react-icons/si';
 import { IconType } from 'react-icons';

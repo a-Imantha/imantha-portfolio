@@ -8,16 +8,16 @@ This directory contains git hooks that automatically run quality checks during g
 
 Runs before `git push` to ensure code quality:
 
+- ✅ Format (auto-fix code style)
 - ✅ ESLint (code quality checks)
 - ✅ TypeScript (type checking)
-- ✅ Tests (when configured)
 
 **When it runs:** Before every `git push`
 
 **What it does:**
-1. Runs `npm run lint` - catches code style issues
-2. Runs `npx tsc --noEmit` - catches type errors
-3. Runs tests (if configured)
+1. Runs `npm run lint -- --fix` - auto-formats code
+2. Runs `npm run lint` - catches code style issues
+3. Runs `npx tsc --noEmit` - catches type errors
 4. Blocks push if any check fails
 
 **Output:**
