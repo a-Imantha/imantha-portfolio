@@ -15,6 +15,7 @@ A modern, production-ready personal portfolio website built with Next.js, TypeSc
 - 📰 **Articles**: Local MDX articles + automatic Medium RSS import
 - 🌌 **Astrophotography Gallery**: Real astrophotography images with detailed metadata
 - ⚡ **Performance**: Optimized with Next.js 15, App Router, and Server Components
+- 📊 **Analytics**: Vercel Analytics + Speed Insights for traffic and performance monitoring
 - ♿ **Accessibility**: Keyboard navigation, ARIA labels, focus management
 
 ## Tech Stack
@@ -26,6 +27,7 @@ A modern, production-ready personal portfolio website built with Next.js, TypeSc
 - **Validation**: Zod for type-safe frontmatter
 - **Icons**: Lucide React
 - **Animation**: Framer Motion (minimal usage)
+- **Analytics**: Vercel Analytics + Speed Insights
 - **Deployment**: Vercel-ready
 
 ## Project Structure
@@ -469,6 +471,107 @@ The app is a standard Next.js application and can be deployed to:
 - Self-hosted with Docker
 
 For Vercel deployment with CD: See **[DEPLOYMENT.md](./DEPLOYMENT.md)**
+
+## Analytics & Insights
+
+This portfolio includes **Vercel Analytics** and **Speed Insights** for comprehensive tracking and performance monitoring.
+
+### What's Tracked
+
+**📊 Vercel Analytics** (FREE on all plans):
+- **Page Views**: Track visitor traffic to each section
+- **Unique Visitors**: Count unique visitors over time
+- **Referrers**: See where your traffic comes from (LinkedIn, GitHub, etc.)
+- **Top Pages**: Most visited pages and sections
+- **Device Types**: Desktop vs mobile breakdown
+- **Geographic Data**: Where your visitors are located
+- **Real-time**: Live visitor dashboard
+
+**⚡ Speed Insights** (FREE on all plans):
+- **Core Web Vitals**: LCP, FID, CLS, TTFB
+- **Performance Score**: Overall site performance
+- **Real User Monitoring**: Actual user experience metrics
+- **Performance Trends**: Track improvements over time
+
+### Viewing Your Analytics
+
+1. **Go to Vercel Dashboard:**
+   ```
+   https://vercel.com/dashboard
+   ```
+
+2. **Select your project** → **Analytics** tab
+
+3. **View real-time data:**
+   - Live visitors right now
+   - Page views in the last 24h/7d/30d
+   - Top performing pages
+   - Traffic sources
+
+4. **Check Speed Insights:**
+   - Click **Speed Insights** tab
+   - View Web Vitals breakdown
+   - See performance by page
+   - Track improvements after optimizations
+
+### Implementation Details
+
+Analytics are automatically included via:
+
+```typescript
+// app/layout.tsx
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
+  );
+}
+```
+
+**Key Features:**
+- ✅ **Privacy-friendly**: No cookies, GDPR compliant
+- ✅ **Zero configuration**: Works out of the box
+- ✅ **No performance impact**: Async loading, < 1KB bundle
+- ✅ **Server-side tracking**: Accurate, not blocked by ad blockers
+- ✅ **Free forever**: Included in Vercel's free tier
+
+### Custom Event Tracking (Optional)
+
+To track custom events (e.g., project card clicks, filter usage):
+
+```typescript
+import { track } from '@vercel/analytics';
+
+// Track custom events
+track('project_viewed', { 
+  project: 'ml-platform',
+  source: 'homepage' 
+});
+
+track('filter_applied', { 
+  filter: 'work',
+  section: 'projects' 
+});
+```
+
+### Upgrade to Pro Analytics (Optional)
+
+If you need advanced features, Vercel offers **Pro Analytics** ($20/month):
+- 📊 Custom funnels
+- 🎯 User segmentation
+- 📈 Advanced filtering
+- 🔍 Session recordings
+- 📱 Mobile app analytics
+
+For a portfolio, the **free tier is typically sufficient** and provides excellent insights.
 
 ## Performance Optimizations
 
