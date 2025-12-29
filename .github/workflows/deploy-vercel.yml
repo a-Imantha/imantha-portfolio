@@ -73,6 +73,7 @@ jobs:
           echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
       
       - name: 💬 Comment Preview URL
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
@@ -82,6 +83,14 @@ jobs:
               repo: context.repo.repo,
               body: `✅ Preview deployment ready!\n\n🔗 **Preview URL:** ${{ steps.deploy.outputs.deployment_url }}`
             })
+      
+      - name: 📝 Print Preview URL
+        run: |
+          echo "🎉 Preview deployment successful!"
+          echo ""
+          echo "🔗 Preview URL: ${{ steps.deploy.outputs.deployment_url }}"
+          echo ""
+          echo "💡 Tip: Enable 'Read and write permissions' in Actions settings to auto-comment on PRs"
 
   deploy-production:
     name: Deploy Production
