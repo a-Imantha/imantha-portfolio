@@ -422,28 +422,53 @@ If the RSS feed is unavailable, the site still builds successfully showing only 
 ### Production Build
 
 ```bash
-pnpm build
-pnpm start
+make build       # Build production bundle
+make start       # Start production server locally
 ```
 
-### Deploy to Vercel
+### Deploy to Vercel (Recommended)
 
-1. Push your code to GitHub
-2. Import the project in Vercel
-3. Set environment variables (if using Medium RSS)
-4. Deploy!
+**🚀 Quick Start:**
 
-Vercel automatically detects Next.js and configures everything.
+1. **Import to Vercel:**
+   - Go to [vercel.com](https://vercel.com)
+   - Click "Import Project"
+   - Select this repository
+   - Click "Deploy"
+
+2. **Setup Continuous Deployment:**
+   - Follow the comprehensive guide: **[DEPLOYMENT.md](./DEPLOYMENT.md)**
+   - Configure GitHub Actions for automatic deployments
+   - Set up preview deployments for pull requests
+
+**What you get:**
+- ✅ Automatic deployments on push to `main`
+- ✅ Preview deployments for every PR
+- ✅ Quality checks before deployment
+- ✅ Custom domain support
+- ✅ Edge caching and HTTPS
+
+**Required Secrets** (for GitHub Actions):
+```bash
+VERCEL_TOKEN          # From Vercel account settings
+VERCEL_ORG_ID         # From project settings
+VERCEL_PROJECT_ID     # From project settings
+MEDIUM_RSS_URL        # Optional: Your Medium RSS feed
+```
+
+See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for detailed step-by-step instructions.
 
 ### Deploy to Other Platforms
 
 The app is a standard Next.js application and can be deployed to:
-- Vercel (recommended)
+- **Vercel** (recommended, zero-config)
 - Netlify
 - AWS Amplify
 - Railway
 - Render
 - Self-hosted with Docker
+
+For Vercel deployment with CD: See **[DEPLOYMENT.md](./DEPLOYMENT.md)**
 
 ## Performance Optimizations
 
