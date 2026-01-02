@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Github, Linkedin, Mail, Award, GraduationCap } from 'lucide-react';
-import { SiPython, SiKubernetes, SiTerraform } from 'react-icons/si';
+import { SiPython, SiPytorch, SiAmazon, SiGo, SiScikitlearn, SiGooglecloud, SiKubernetes, SiHuggingface } from 'react-icons/si';
 
 export function HeroSection() {
   return (
@@ -27,7 +27,7 @@ export function HeroSection() {
               </span>
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed max-w-xl">
-              Building production ML systems at scale. Specializing in MLOps, 
+              End-to-end ML solutions from data to model training to backend to frontend. Specializing in MLOps, 
               cloud architecture, and explainable AI.
             </p>
           </div>
@@ -57,13 +57,13 @@ export function HeroSection() {
             <div className="flex items-start justify-between">
               <div>
                 <h3 className="text-lg font-semibold text-white">ML Engineering Lead</h3>
-                <p className="text-blue-400">CML Insights</p>
+                <p className="text-blue-400">Astromind</p>
               </div>
-              <span className="text-xs text-gray-400">2022 - Present</span>
+              <span className="text-xs text-gray-400">Dec 2024 - Present</span>
             </div>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Architecting end-to-end ML infrastructure with Kubeflow, MLflow, and Kubernetes. 
-              Delivered 4 production applications serving thousands of users.
+              Building ML solutions for astronomical data analysis. Fine-tuning LLMs for Chandra X-ray Observatory 
+              and developing RAG-based platforms with sandboxed execution environments.
             </p>
             <div className="flex flex-wrap gap-2">
               <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 bg-blue-950/50 text-blue-300 rounded-full border border-blue-500/20">
@@ -71,16 +71,32 @@ export function HeroSection() {
                 Python
               </span>
               <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 bg-blue-950/50 text-blue-300 rounded-full border border-blue-500/20">
+                <SiPytorch className="w-3.5 h-3.5" />
+                PyTorch
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 bg-blue-950/50 text-blue-300 rounded-full border border-blue-500/20">
+                <SiHuggingface className="w-3.5 h-3.5" />
+                Transformers
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 bg-blue-950/50 text-blue-300 rounded-full border border-blue-500/20">
+                <SiScikitlearn className="w-3.5 h-3.5" />
+                Sklearn
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 bg-blue-950/50 text-blue-300 rounded-full border border-blue-500/20">
+                <SiGo className="w-3.5 h-3.5" />
+                Golang
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 bg-blue-950/50 text-blue-300 rounded-full border border-blue-500/20">
+                <SiAmazon className="w-3.5 h-3.5" />
+                AWS
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 bg-blue-950/50 text-blue-300 rounded-full border border-blue-500/20">
+                <SiGooglecloud className="w-3.5 h-3.5" />
+                GCP
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 bg-blue-950/50 text-blue-300 rounded-full border border-blue-500/20">
                 <SiKubernetes className="w-3.5 h-3.5" />
                 Kubernetes
-              </span>
-              <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 bg-blue-950/50 text-blue-300 rounded-full border border-blue-500/20">
-                <SiKubernetes className="w-3.5 h-3.5" />
-                MLflow
-              </span>
-              <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 bg-blue-950/50 text-blue-300 rounded-full border border-blue-500/20">
-                <SiTerraform className="w-3.5 h-3.5" />
-                Terraform
               </span>
             </div>
           </div>
@@ -153,19 +169,7 @@ export function HeroSection() {
               />
             </div>
 
-            {/* Floating badges */}
-            <div className="absolute -top-4 -right-4 bg-gray-900 border border-gray-700 rounded-xl p-4 shadow-xl backdrop-blur-sm">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                  <Award className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400">Publications</p>
-                  <p className="text-lg font-bold text-white">2</p>
-                </div>
-              </div>
-            </div>
-
+            {/* Floating badge */}
             <div className="absolute -bottom-4 -left-4 bg-gray-900 border border-gray-700 rounded-xl p-4 shadow-xl backdrop-blur-sm">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">

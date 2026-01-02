@@ -1,0 +1,60 @@
+---
+title: "Contrastive Learning: Aligning Chandra Event Data with Research Papers"
+slug: "astromind-contrastive-learning"
+type: "work"
+org: "Astromind (in collaboration with CfA Harvard)"
+period: "December 2024 - Present"
+role: "ML Engineer & Researcher"
+tech: ["python", "pytorch", "runpod", "pinecone"]
+links:
+  - label: "Astromind"
+    url: "https://astromind.ai"
+  - label: "Center for Astrophysics | Harvard & Smithsonian"
+    url: "https://www.cfa.harvard.edu/"
+highlights:
+  - "Collaborating with Center for Astrophysics (CfA) Harvard on cutting-edge contrastive learning research"
+  - "Creating shared embedding spaces between Chandra X-ray Observatory event data and astronomical research papers"
+  - "Developing novel encoder architecture that bridges observational data with scientific literature"
+  - "Enabling direct retrieval and semantic search across both data and text modalities"
+heroImage: "/images/projects/contrastive-learning.png"
+images:
+  - "/images/projects/contrastive-learning.png"
+techNotes:
+  python: "Core development language for contrastive learning pipeline and data processing"
+  pytorch: "Framework for contrastive learning models, embedding networks, and training optimization"
+  runpod: "For renting GPUs"
+  pinecone: "For storing contrastive learned vectors for similarity matching"
+---
+
+## Overview
+
+Collaborative research project with the Center for Astrophysics at Harvard to create shared embedding spaces between Chandra X-ray Observatory event data and astronomical research papers using contrastive learning.
+
+## Challenge
+
+Astronomical research involves two distinct modalities that traditionally exist in separate silos:
+- **Observational Data**: Raw event files with time, energy, and position measurements
+- **Scientific Literature**: Research papers describing and interpreting observations
+
+The goal was to create a unified embedding space enabling cross-modal retrieval between data and text.
+
+## Approach
+
+Developed contrastive learning framework with dual encoders:
+- **Event Encoder**: Processes Chandra event lists using CNN/Transformer hybrid
+- **Text Encoder**: Processes research papers using pre-trained language models (SciBERT)
+- **Contrastive Loss**: NT-Xent loss to align embeddings in shared space
+
+Used hard negative mining and temperature scaling for efficient training on paired observation-paper datasets.
+
+## Technologies
+
+- **PyTorch**: Model development and training
+- **Python**: Core implementation and data processing
+- **RunPod**: GPU infrastructure
+- **Pinecone**: Vector storage for similarity matching
+
+## Impact
+
+Achieved >85% top-5 retrieval accuracy for paper-to-data matching, enabling intelligent data retrieval, literature-guided analysis, and automated annotation of astronomical observations. Embeddings cluster meaningfully by astronomical object type and generalize to unseen source types.
+

@@ -2,12 +2,37 @@
 
 import React, { useState } from 'react';
 import { Section } from '@/components/ui/Section';
-import { Building2, Calendar, ChevronDown } from 'lucide-react';
+import { Building2, Calendar, ChevronDown, FolderOpen } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export function ExperienceSection() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const experiences = [
+    {
+      role: 'Machine Learning Engineering Lead (Outsourced)',
+      company: 'Astromind',
+      logo: '/images/logos/astromind.png',
+      location: 'Remote',
+      period: 'December 2024 - Present',
+      current: true,
+      description: 'Leading end-to-end development of ML solutions for astronomical data analysis, from system architecture and R&D to backend services, LLM fine-tuning, and frontend implementation.',
+      responsibilities: [
+        'Working end-to-end on application development: designing system architecture, conducting R&D, implementing backend services, fine-tuning and integrating LLM models, and building frontend interfaces',
+        'Fine-tuning LLMs (GPT-Neo, Llama, QWEN) to understand and analyze Chandra X-ray Observatory event files, bridging a novel input space with language models',
+        'Developing custom encoders using Flamingo architecture to map astronomical time-series data to already trained LLM embedding spaces',
+        'Collaborating with CfA Harvard on contrastive learning to create shared embedding spaces between Chandra event data and research papers',
+        'Building Lium Platform - a full-stack RAG-based system with sandboxed Python execution and fine-tuned LLMs for multi-dimensional data',
+      ],
+      techStack: 'Next.js, Python, Golang, PyTorch, Transformers, HuggingFace, OpenAI, LangGraph, LangChain, MLOps, Kubernetes, AWS, Pulumi, PostgreSQL, MongoDB, MCP',
+      products: ['Lium Platform', 'Chandra LLM Platform'],
+      projects: [],
+      projectLinks: [
+        { slug: 'astromind-chandra-llm', title: 'Fine-tuning LLMs for Chandra X-ray Observatory Data' },
+        { slug: 'astromind-contrastive-learning', title: 'Contrastive Learning: Aligning Chandra Event Data with Research Papers' },
+        { slug: 'astromind-lium-platform', title: 'Lium Platform: RAG-Based Intelligence for Complex Datasets' },
+      ],
+    },
     {
       role: 'Machine Learning Engineering Lead',
       company: 'CML Insights',
@@ -15,7 +40,7 @@ export function ExperienceSection() {
       location: 'Remote',
       period: 'July 2022 - Present',
       current: true,
-      description: 'Leading end-to-end ML architecture and infrastructure for multiple production applications.',
+      description: 'Led end-to-end ML architecture and infrastructure for multiple production applications.',
       responsibilities: [
         'Planned and designed end-to-end architectures for applications, including database schemas, microservices, and scalable cloud solutions',
         'Managed cloud infrastructure using Terraform and Kustomize, building CI/CD pipelines and deploying microservices on Kubernetes clusters',
@@ -24,9 +49,12 @@ export function ExperienceSection() {
         'Processed and analyzed large datasets to derive actionable insights and formulated algorithms tailored to address diverse business needs',
         'Led the team by creating design documents, allocating tasks, providing guidance, and maintaining proper documentation to ensure project success',
       ],
-      techStack: 'Google Cloud, Azure Cloud, Kubernetes, Python, Golang, Dagster, Kubeflow, MLFlow, Dask, Sklearn, OpenAI, Terraform, ArgoCD, Grafana, Keycloak, Kong',
+      techStack: 'Python, Golang, Kubernetes, Google Cloud, Azure Cloud, Kubeflow, MLFlow, Dagster, Sklearn, Dask, OpenAI, Terraform, Kustomize, ArgoCD, Grafana, Keycloak, Kong, PostgreSQL, MongoDB',
       products: ['CML Insights App', 'Evidence Hub App', 'Evidence Hub Curator App', 'Fair Appraisal App'],
-      projects: ['Kids Read Now', 'JG Wentworth'],
+      projects: [],
+      projectLinks: [
+        { slug: 'work-ml-platform', title: 'ML Engineering Platform & Infrastructure' },
+      ],
     },
     {
       role: 'Software Engineer',
@@ -45,6 +73,7 @@ export function ExperienceSection() {
       techStack: 'AWS, IFS Aurena, Oracle PL/SQL, .NET C#',
       products: ['Fleet Planner', 'Aviation Technical Content Manager'],
       projects: [],
+      projectLinks: [],
     },
     {
       role: 'Trainee Software Engineer',
@@ -62,6 +91,7 @@ export function ExperienceSection() {
       techStack: 'PLC Programming, SCADA Systems',
       products: [],
       projects: [],
+      projectLinks: [],
     },
     {
       role: 'Trainee Engineer',
@@ -79,6 +109,7 @@ export function ExperienceSection() {
       techStack: 'Power Systems, Electrical Engineering',
       products: [],
       projects: [],
+      projectLinks: [],
     },
   ];
 
@@ -210,6 +241,46 @@ export function ExperienceSection() {
                           </div>
                         </div>
                       )}
+                    </div>
+                  )}
+
+                  {/* Portfolio Projects with Links */}
+                  {exp.projectLinks && exp.projectLinks.length > 0 && (
+                    <div className="pt-4 border-t border-gray-700">
+                      <div className="flex items-center gap-2 mb-3">
+                        <FolderOpen className="w-4 h-4 text-blue-400" />
+                        <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                          Portfolio Projects ({exp.projectLinks.length})
+                        </h4>
+                      </div>
+                      <div className="space-y-2">
+                        {exp.projectLinks.map((project, idx) => (
+                          <Link
+                            key={idx}
+                            href={`/projects/${project.slug}`}
+                            className="group block p-3 bg-gray-800/50 hover:bg-gray-800 border border-gray-700 hover:border-blue-500/50 rounded-lg transition-all"
+                          >
+                            <div className="flex items-start justify-between gap-3">
+                              <span className="text-sm text-gray-300 group-hover:text-blue-400 transition-colors line-clamp-2">
+                                {project.title}
+                              </span>
+                              <svg
+                                className="w-4 h-4 text-gray-500 group-hover:text-blue-400 flex-shrink-0 mt-0.5 transition-colors"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 5l7 7-7 7"
+                                />
+                              </svg>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   )}
 

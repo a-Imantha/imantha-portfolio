@@ -1,0 +1,73 @@
+---
+title: "Lium Platform: RAG-Based Intelligence for Complex Datasets"
+slug: "astromind-lium-platform"
+type: "work"
+org: "Astromind"
+period: "December 2024 - Present"
+role: "Platform Architect & Lead Engineer"
+tech: ["python", "golang", "aws", "nextjs", "pulumi", "mcp", "postgresql"]
+links:
+  - label: "Astromind"
+    url: "https://astromind.ai"
+highlights:
+  - "Architected and built production RAG platform for analyzing multi-dimensional time-series data"
+  - "Integrated fine-tuned LLMs, sandboxed Python execution, and tool-based workflows"
+  - "Designed scalable microservices architecture using Golang, Python, and Kubernetes"
+  - "Deployed on AWS with full CI/CD using Pulumi infrastructure-as-code"
+heroImage: "/images/projects/liumplatform.png"
+images:
+  - "/images/projects/liumplatform.png"
+techNotes:
+  python: "Backend, data processing pipelines and Agentic framework with mcp tool handling implemented with python "
+  golang: "Sandboxed code executor is implemented with golang"
+  aws: "Whole stack is running in aws. Using ECS, ECR, S3, RDS..."
+  nextjs: "Web app implementation"
+  pulumi: "Infra as a code implementation was done with Pulumi"
+  mcp: "mcp servers were defined for different purposes and introduced as tools for llm agents to use"
+  postgresql: "Relational db for the application data management"
+---
+
+## Overview
+
+Production RAG platform for analyzing multi-dimensional time-series data, combining fine-tuned LLMs, sandboxed code execution, and domain-specific tools to enable natural language interaction with complex datasets.
+
+## Architecture
+
+Full-stack platform with three main layers:
+- **Frontend**: Next.js web application with real-time streaming
+- **Backend**: Golang API gateway with job orchestration
+- **ML Services**: Python-based LLM integration and data processing
+
+## Key Features
+
+### RAG Pipeline
+Retrieval-Augmented Generation system with custom embeddings, hybrid search, and intelligent context management for domain-specific queries.
+
+### Sandboxed Execution
+Secure, isolated Python execution environment with resource limits, enabling users to run custom analysis scripts safely on platform data.
+
+### Tool Integration
+Model Context Protocol (MCP) servers providing standardized interfaces for LLM tools, enabling intelligent workflows and multi-step analysis.
+
+## Technologies
+
+- **Next.js**: Web application and UI
+- **Golang**: API gateway and sandboxed code executor
+- **Python**: Agentic framework with MCP tool handling
+- **AWS**: Cloud infrastructure (ECS, S3, RDS)
+- **Pulumi**: Infrastructure as code
+- **PostgreSQL**: Application data management
+- **MCP**: Tool integration for LLM agents
+
+## Infrastructure
+
+Deployed on AWS using Pulumi for infrastructure management:
+- Containerized microservices on ECS
+- PostgreSQL database on RDS
+- Object storage on S3
+- CI/CD with automated deployments
+
+## Impact
+
+Enables natural language querying of complex datasets, automated analysis workflows, and intelligent data exploration for research and production use cases.
+
