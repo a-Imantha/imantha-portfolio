@@ -36,6 +36,8 @@ export function EducationSection() {
         title: 'Explainable Image Segmentation for Spatio-Temporal and Multivariate Image Data in Precipitation Nowcasting',
         grade: 'A',
         award: 'Gold Award - National ICT Awards 2024',
+        publication: 'Published in "Results in Engineering" (Elsevier, 2025)',
+        publicationLink: 'https://doi.org/10.1016/j.rineng.2025.105595',
       },
     },
     {
@@ -72,7 +74,7 @@ export function EducationSection() {
       specialization: 'Physical Science',
       grade: 'All A Passes (First Attempt)',
       highlight: false,
-      description: 'Excelled in physics, chemistry, and combined mathematics.',
+      description: 'Ranked 715th island-wide among 300,000+ students. Qualified for University of Moratuwa, the premier engineering university in Sri Lanka.',
     },
     {
       degree: 'GCE Ordinary Level',
@@ -102,30 +104,24 @@ export function EducationSection() {
           >
             {/* Header */}
             <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
-              <div className="flex-1">
-                <div className="flex items-start gap-3 mb-2">
-                  <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0 p-1.5">
-                    {edu.logo ? (
-                      <Image
-                        src={edu.logo}
-                        alt={`${edu.institution} logo`}
-                        width={48}
-                        height={48}
-                        className="object-contain"
-                      />
-                    ) : (
-                      <GraduationCap className="w-6 h-6 text-gray-800" />
-                    )}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white mb-1">{edu.degree}</h3>
-                    <p className="text-blue-400 font-medium">{edu.institution}</p>
-                  </div>
+              <div className="flex items-start gap-3 flex-1">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0 p-1.5">
+                  {edu.logo ? (
+                    <Image
+                      src={edu.logo}
+                      alt={`${edu.institution} logo`}
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <GraduationCap className="w-6 h-6 text-gray-800" />
+                  )}
                 </div>
-                
-                {edu.description && (
-                  <p className="text-gray-300 text-sm ml-15">{edu.description}</p>
-                )}
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-white mb-1">{edu.degree}</h3>
+                  <p className="text-blue-400 font-medium">{edu.institution}</p>
+                </div>
               </div>
 
               <div className="flex flex-col items-start lg:items-end gap-2">
@@ -146,6 +142,10 @@ export function EducationSection() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
               {/* Left Column */}
               <div className="space-y-3">
+                {edu.description && (
+                  <p className="text-gray-300 text-sm leading-relaxed">{edu.description}</p>
+                )}
+                
                 {edu.specialization && (
                   <div>
                     <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
@@ -195,6 +195,16 @@ export function EducationSection() {
                           <Award className="w-3 h-3" />
                           {edu.thesis.award}
                         </span>
+                      )}
+                      {edu.thesis.publication && (
+                        <a
+                          href={edu.thesis.publicationLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-2 py-1 text-xs bg-blue-950/50 text-blue-300 border border-blue-500/30 rounded hover:bg-blue-900/50 transition-colors"
+                        >
+                          {edu.thesis.publication}
+                        </a>
                       )}
                     </div>
                   </div>

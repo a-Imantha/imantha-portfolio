@@ -1,0 +1,51 @@
+---
+title: "Fine-tuning LLMs for Chandra X-ray Observatory Data"
+slug: "astromind-chandra-llm"
+type: "work"
+org: "Astromind"
+period: "December 2024 - Present"
+role: "ML Engineer & Researcher"
+tech: ["python", "pytorch", "transformers", "mongodb", "runpod"]
+links:
+  - label: "Astromind"
+    url: "https://astromind.org"
+highlights:
+  - "Fine-tuned multiple LLMs (GPT-Neo, Llama, QWEN 7B) to enable those models to answer questions on Chandra X-ray Observatory event files"
+  - "Developed custom encoders using Flamingo architecture to bridge astronomical time-series data inputs with already trained LLM embedding spaces"
+  - "Pioneered novel approach to introduce completely different input spaces (time, energy event lists) to pre-trained language models"
+  - "Enabled LLMs to answer questions about Chandra event data without traditional text-based inputs"
+  - "This process make it easier to finetune an LLM to a completely different input space with less effort"
+heroImage: "/images/projects/chandra-llm.webp"
+images:
+  - "/images/projects/chandra-llm.webp"
+techNotes:
+  python: "Core implementation done using python"
+  pytorch: "Model development, training, and fine-tuning"
+  transformers: "Base models and training utilities"
+  mongodb: "Data used for the process was stored here"
+  runpod: "We used runpod for renting GPUs for finetuning process"
+---
+
+## Overview
+
+Fine-tuning large language models to understand and analyze astronomical event data from the Chandra X-ray Observatory. The goal is to enable LLMs to process and interpret time-series astronomical data that exists in a completely different input space than traditional text.
+
+## Challenge
+
+Chandra event files contain time-series photon detection data with energy measurements and spatial coordinates—a fundamentally different modality that standard LLMs cannot process. The challenge was bridging this gap between continuous time-series data and discrete token spaces.
+
+## Approach
+
+Developed custom encoders using Flamingo architecture to map astronomical time-series data into already trained LLM embedding spaces. Fine-tuned multiple models including GPT-Neo, Llama, and QWEN 7B using curriculum learning and multi-stage training.
+
+## Technologies
+
+- **PyTorch & Transformers**: Model development and fine-tuning
+- **Python**: Core implementation and data processing
+- **MongoDB**: Training data storage
+- **RunPod**: GPU infrastructure for training
+
+## Impact
+
+Successfully enabled LLMs to interpret astronomical event data, achieving high accuracy in analyzing source characteristics, variability, and spectral properties across various X-ray sources (AGN, stars, SNR, galaxies).
+
