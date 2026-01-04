@@ -38,13 +38,16 @@ export async function getAllProjects(): Promise<Project[]> {
   const projectsDir = path.join(contentDir, 'projects');
   const files = getAllMdxFiles(projectsDir);
 
-  return Promise.all(files.map(async (file) => {
+  const projects = await Promise.all(files.map(async (file) => {
     const filePath = path.join(projectsDir, file);
     const { frontmatter, content } = readMdxFile(filePath);
     const validated = ProjectSchema.parse(frontmatter);
     const htmlContent = await markdownToHtml(content);
     return { ...validated, content: htmlContent };
   }));
+
+  // Sort by periodStart descending (most recent first)
+  return projects.sort((a, b) => b.periodStart.localeCompare(a.periodStart));
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {

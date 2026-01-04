@@ -1,0 +1,67 @@
+---
+title: "CML Insights App - Causal ML Platform"
+slug: "work-cml-insights-app"
+type: "work"
+org: "CML Insights"
+period: "July 2022 - 2024"
+periodStart: "2022-07"
+role: "Machine Learning Engineering Lead"
+tech: ["python", "kubernetes", "postgres", "sklearn", "terraform", "gcp", "dagster", "kustomize"]
+highlights:
+  - "Architected end-to-end platform from data pipelines to cloud deployment"
+  - "Designed causal inference engine using propensity score matching"
+  - "Built microservices architecture on Kubernetes with Terraform/Kustomize IaC"
+  - "Engineered ML pipelines with Dagster and Kubeflow for automated workflows"
+  - "Led team through design docs, task allocation, and technical documentation"
+heroImage: "/images/projects/cml-app.png"
+images: []
+techNotes:
+  python: "Built data processing pipelines and ML algorithms for causal analysis"
+  kubernetes: "Deployed microservices architecture with autoscaling and health monitoring"
+  postgres: "Designed database schemas for ML features and application state"
+  sklearn: "Implemented propensity score matching and ML models"
+  terraform: "Provisioned GCP infrastructure with reproducible IaC patterns"
+  gcp: "Deployed on GKE with Cloud Storage and Cloud SQL"
+  dagster: "Orchestrated ML pipelines and data workflows"
+  kustomize: "Managed Kubernetes configurations across dev/staging/prod"
+---
+
+## Overview
+
+Causal machine learning platform that goes beyond standard predictions to answer the "why" behind events. Architected for higher education institutions to understand true drivers of student outcomes and make evidence-based decisions using causal relationships rather than correlations.
+
+## Architecture
+
+Full-stack platform with layered architecture:
+- **Data layer**: PostgreSQL schemas normalized for efficient feature access
+- **Processing layer**: Python microservices for ETL, feature engineering, and model training
+- **Orchestration**: Dagster pipelines coordinating batch jobs and retraining
+- **Deployment**: Kubernetes on GCP with Terraform-managed infrastructure
+
+## Key Technical Contributions
+
+### Causal Inference Engine
+Built improved propensity score matching algorithm with gradient boosting models for propensity calculation, custom distance metrics for treatment-control matching, and sensitivity analysis for assumption validation. Optimized using approximate nearest neighbor search and Dask parallelization, reducing runtime from hours to minutes for 100K+ observation datasets.
+
+### Multi-Tenancy System
+Designed flexible metadata layer mapping client-specific data schemas to platform standards, enabling onboarding new institutions without code changes. Implemented multiple imputation strategies handling 20-30% missing data rates common in educational datasets.
+
+### ML Pipeline Automation
+Created end-to-end workflows ingesting from multiple sources (CSV, databases, APIs), engineering domain-specific features (retention, graduation, performance metrics), training ensemble models with hyperparameter optimization, and deploying via GitOps with data drift monitoring.
+
+### Technical Leadership
+Wrote design documents, conducted architecture reviews, mentored engineers on ML best practices, and established coding standards ensuring scalability and maintainability across the engineering team.
+
+## Technologies
+
+- **Python**: Scikit-learn, Pandas, NumPy, Dask
+- **Kubernetes**: Microservices deployment with autoscaling
+- **PostgreSQL**: ML feature storage and application state
+- **GCP**: GKE, Cloud SQL, Cloud Storage
+- **MLOps**: Dagster, Kubeflow pipelines
+- **IaC**: Terraform, Kustomize, ArgoCD
+
+## Impact
+
+Platform serves institutions from small colleges to large university systems, identifying actionable interventions with proven causal effects. Enables resource allocation to effective programs while avoiding ineffective ones, supporting rigorous causal studies with publishable methodology.
+

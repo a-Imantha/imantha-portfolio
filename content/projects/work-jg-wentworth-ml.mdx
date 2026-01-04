@@ -1,0 +1,63 @@
+---
+title: "J.G. Wentworth - ML Platform for Financial Services"
+slug: "work-jg-wentworth-ml"
+type: "work"
+org: "CML Insights (Client: J.G. Wentworth)"
+period: "2023 - 2024"
+periodStart: "2023-01"
+role: "Machine Learning Engineering Lead"
+tech: ["python", "sklearn", "azure", "mlflow", "pandas"]
+highlights:
+  - "Built 3 production ML models: enrollment, contact propensity, and churn prediction"
+  - "Designed media mix optimization managing multi-million dollar marketing budgets"
+  - "Developed custom MOM scoring algorithm for feature selection"
+  - "Integrated TransUnion credit data and US Census demographics into 70+ feature pipeline"
+  - "Delivered $500K+ budget reallocation recommendations across 50+ marketing channels"
+heroImage: "/images/projects/ml-platform.png"
+images: []
+techNotes:
+  python: "Built ML models and data pipelines processing financial and credit data"
+  sklearn: "Implemented gradient boosting models and polynomial regression"
+  azure: "Connected to Azure SQL Data Warehouse for data extraction"
+  mlflow: "Tracked experiments and versioned models for production deployment"
+  pandas: "Processed large datasets with 2+ years of lead and transaction history"
+---
+
+## Overview
+
+Machine learning platform for J.G. Wentworth, a debt resolution company, predicting customer behavior and optimizing marketing spend across their multi-million dollar acquisition pipeline. Built as outsourced ML engineer through CML Insights, processing 30K+ monthly leads with real-time scoring.
+
+## Architecture
+
+End-to-end ML system with integrated data sources:
+- **Data Integration**: Azure SQL Data Warehouse, TransUnion credit API, US Census DP03, Salesforce CRM
+- **ML Models**: Three gradient boosting classifiers for enrollment, contact, and churn prediction
+- **Optimization**: Polynomial regression for media mix modeling across 50+ channels
+- **Deployment**: MLflow tracking with monthly retraining cycles
+
+## Key Technical Contributions
+
+### Custom MOM Feature Selection Algorithm
+Developed Measure of Match scoring from scratch, evaluating prediction power by measuring distribution overlap between positive and negative classes. For numerical features, creates histograms calculating probability densities with overlap metric `Σ min(P_pos[bin_i], P_neg[bin_i])`. For categoricals, uses frequency distributions with top-N grouping for high cardinality. Handles missing values explicitly since missingness itself is predictive in financial data.
+
+### Three Production ML Models
+Built gradient boosting classifiers: enrollment prediction (14-day window, tertile scoring for sales prioritization), contact propensity (70+ features with top predictors: total debt 20%, marketing channel 12%, FICO 4%), and cancellation prediction (90-day churn risk with intervention triggers). Applied stratified sampling for 8% enrollment rate imbalance, class weights in training, and probability calibration for realistic score distributions.
+
+### Media Mix Optimization
+Designed polynomial saturation modeling (degree-2 polynomials via scikit-learn) capturing diminishing returns in CPL and realizable effect as lead volume scales. Built constrained optimization with scipy solving `maximize Σ(revenue - cost)` subject to budget, saturation limits, and contractual minimums. Validated through A/B tests and holdout analysis, delivering $500K+ reallocation recommendations (±20% adjustments across channels).
+
+### Data Engineering Pipeline
+Integrated TransUnion credit reports (trade lines, balances, inquiries), Census economic indicators (DP03 by ZIP), and Salesforce interactions into 70-80 feature pipeline. Handled different refresh cadences (daily leads, monthly census), schema evolution, PII anonymization, and high cardinality through target encoding and geographic hierarchies (ZIP→county→state).
+
+## Technologies
+
+- **Python**: Scikit-learn (GradientBoost, RandomForest), Pandas, NumPy
+- **Azure**: SQL Data Warehouse for data extraction
+- **MLflow**: Experiment tracking and model registry
+- **SciPy**: Constrained optimization for budget allocation
+- **Data**: 2+ years history, 100K+ observations, 70+ features
+
+## Impact
+
+25% improvement in contact-to-enrollment conversion, 15% reduction in customer acquisition cost, 10% decrease in 90-day churn. System processes 30K+ leads monthly with automated scoring and monthly model retraining maintaining accuracy as market conditions shift.
+
