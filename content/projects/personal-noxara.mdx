@@ -1,0 +1,450 @@
+---
+title: "Noxara - AI-Powered Astrophotography Platform"
+slug: "personal-noxara"
+type: "personal"
+org: "Personal Project"
+period: "2024 - Present"
+periodStart: "2024-01"
+role: "Solo Developer"
+tech: ["python", "nextjs", "openai", "pytorch"]
+highlights:
+  - "Built workflow-first AI platform for astrophotography image processing"
+  - "Designed YAML-based dynamic tool system for agent function calling"
+  - "Implemented multi-personality agent architecture for specialized tasks"
+  - "Created real-time SSE streaming for chat and workflow execution updates"
+  - "Architected project-based storage with transparent JSON workflow definitions"
+heroImage: "/images/projects/ml-platform.png"
+images: []
+techNotes:
+  python: "Backend API with FastAPI, async agent orchestration, FITS file processing"
+  nextjs: "Frontend with App Router, real-time SSE integration, split-pane workflow UI"
+  openai: "GPT-4 for natural language workflow manipulation and file analysis"
+  pytorch: "Future integration for image enhancement models"
+---
+
+## Vision
+
+Noxara answers a frustration I've had for years as an astrophotographer: **processing is opaque**. You stack images, but why these settings? You stretch, but how did the software decide? What if you could just _talk_ to your processing pipeline?
+
+I built Noxara as a **workflow-first AI platform** where you chat with an agent that transparently builds, explains, and executes astrophotography processing pipelines. No black boxes—every decision is visible, every step is modifiable.
+
+## Architecture
+
+### Tool System Design
+
+The core innovation is a **dynamic tool loading system** that bridges natural language and code execution:
+
+**Tool Definitions (YAML)**  
+Each tool is defined declaratively in `/tools/definitions/`:
+
+```yaml
+name: analyze_files
+description: Analyze FITS files and classify frame types
+type: local
+parameters:
+  type: object
+  properties:
+    folder_path:
+      type: string
+      description: Path to FITS files
+  required:
+    - folder_path
+status: active
+```
+
+**Tool Loader**  
+Python `ToolLoader` class scans the definitions directory at startup:
+
+```python
+class ToolLoader:
+    def __init__(self, definitions_path):
+        self._tools: dict[str, ToolDefinition] = {}
+        self._load_tools()
+    
+    def _load_tools(self):
+        """Scan YAML files, parse definitions."""
+        for yaml_file in self.definitions_path.glob("*.yml"):
+            tool = ToolDefinition(yaml.safe_load(yaml_file))
+            self._tools[tool.name] = tool
+    
+    def to_openai_tools(self):
+        """Convert to OpenAI function calling format."""
+        return [tool.to_openai_format() for tool in self._tools.values()]
+```
+
+This means:
+- ✅ **No hardcoding** - Add a new tool by dropping a YAML file
+- ✅ **Type safety** - Pydantic validates parameters at runtime
+- ✅ **Self-documenting** - Definitions are the documentation
+- ✅ **Version control** - Tools are tracked in Git
+
+**Tool Implementations**  
+Each tool has a corresponding Python handler in `/tools/`:
+
+```python
+# tools/analyze_files.py
+async def analyze_files(folder_path: str, project_id: str) -> dict:
+    """Scan FITS files, extract headers, classify types."""
+    fits_files = scan_directory(folder_path)
+    
+    classifications = {}
+    for file in fits_files:
+        header = extract_fits_header(file)
+        frame_type = classify_frame(header)  # LIGHT, DARK, BIAS, FLAT
+        classifications[file] = {
+            "type": frame_type,
+            "exposure": header.get("EXPTIME"),
+            "temperature": header.get("CCD-TEMP"),
+            "filter": header.get("FILTER")
+        }
+    
+    return {
+        "summary": f"Found {len(fits_files)} files",
+        "classifications": classifications,
+        "recommended_workflow": generate_workflow_suggestion(classifications)
+    }
+```
+
+**Agent Integration**  
+The agent receives tool definitions and calls them naturally:
+
+```python
+# Agent workflow
+messages = [
+    {"role": "system", "content": system_prompt},
+    {"role": "user", "content": "Analyze my M42 images"}
+]
+
+response = await openai.chat.completions.create(
+    model="gpt-4",
+    messages=messages,
+    tools=tool_loader.to_openai_tools()  # Inject all tools
+)
+
+# Agent decides to call analyze_files
+tool_call = response.choices[0].message.tool_calls[0]
+result = await execute_tool(tool_call.function.name, tool_call.function.arguments)
+
+# Agent interprets results
+messages.append({"role": "tool", "content": json.dumps(result)})
+final_response = await openai.chat.completions.create(...)
+```
+
+### Multi-Personality Agent System
+
+I separated agent logic into specialized personalities:
+
+**Project Analysis Agent**  
+Used during project creation. Analyzes folder structure, extracts metadata from FITS headers, suggests workflows:
+
+```python
+class ProjectAnalysisAgent:
+    """Single-purpose: analyze files, auto-fill project metadata."""
+    
+    def __init__(self, folder_path: str):
+        self.prompt = load_prompt("project_analysis.txt")
+        self.tools = ["list_files", "analyze_files", "get_fits_meta"]
+    
+    async def analyze(self) -> dict:
+        """Return metadata suggestions for project creation form."""
+        # Agent scans folder, extracts:
+        # - Object name (from FITS OBJECT keyword)
+        # - Observation date (DATE-OBS)
+        # - Equipment (TELESCOP, INSTRUME)
+        # - File summary (counts by type)
+        return suggestions
+```
+
+**Workflow Agent**  
+Ongoing assistant for workflow manipulation. Adds steps, modifies parameters, explains decisions:
+
+```python
+class WorkflowAgent:
+    """Interactive: helps user build and modify processing workflow."""
+    
+    def __init__(self, project_id: str, workflow: Workflow):
+        self.prompt = load_prompt("workflow_assistant.txt")
+        self.workflow = workflow
+        self.tools = [
+            "add_workflow_step",
+            "modify_workflow_step",
+            "remove_workflow_step",
+            "execute_job",
+            "view_step_output"
+        ]
+    
+    async def chat(self, user_message: str):
+        """Chat with full workflow context."""
+        context = {
+            "workflow": self.workflow.model_dump(),
+            "current_status": self.workflow.status,
+            "step_count": len(self.workflow.steps)
+        }
+        # Agent can see entire workflow state when responding
+```
+
+This separation ensures:
+- **Clear responsibilities**: One agent analyzes, one assists
+- **Focused prompts**: Each has domain-specific instructions
+- **Different tool access**: Only relevant tools exposed per agent
+
+### Workflow-First UI
+
+Typical chat-first UIs hide the structure. I inverted this:
+
+**Layout (70/30 Split)**
+```
+┌──────────────────────────────────────────────────┐
+│                WORKFLOW (70%)        │ CHAT (30%)│
+│                                      │            │
+│  ┌─────────────────────┐            │  Agent:    │
+│  │ 1. CALIBRATE        │            │  "Found 50 │
+│  │ Input: raw/M42      │            │  lights,   │
+│  │ Output: cal/        │            │  20 darks" │
+│  │ Status: ✅ Done     │            │            │
+│  └─────────────────────┘            │  User:     │
+│            ↓                         │  "Stack    │
+│  ┌─────────────────────┐            │  with      │
+│  │ 2. STACK            │            │  sigma     │
+│  │ Method: sigma_clip  │            │  clipping" │
+│  │ Output: stacked.fit │            │            │
+│  │ Status: ⏳ Running  │            │  Agent:    │
+│  └─────────────────────┘            │  "Updated  │
+│            ↓                         │  step 2"   │
+│  ┌─────────────────────┐            │            │
+│  │ 3. STRETCH          │            │ [Send]     │
+│  │ Status: ⏹️ Draft    │            │            │
+│  └─────────────────────┘            │            │
+│                                      │            │
+│  [▶ Execute Workflow]                │            │
+└──────────────────────────────────────────────────┘
+```
+
+The workflow is always visible. Chat modifies it in real time.
+
+### JSON Pipeline Transparency
+
+Every workflow is stored as a JSON file:
+
+```json
+{
+  "id": "wf_a3f8e",
+  "project_id": "proj_m42",
+  "steps": [
+    {
+      "id": "step_001",
+      "order": 1,
+      "module": "calibrate",
+      "name": "Master Calibration",
+      "inputs": [
+        { "name": "lights", "path": "raw/lights", "type": "folder" },
+        { "name": "darks", "path": "raw/darks", "type": "folder" }
+      ],
+      "outputs": [
+        { "name": "calibrated", "path": "processed/calibrated", "type": "folder" }
+      ],
+      "parameters": {
+        "master_dark_method": "median",
+        "sigma_clip": 3.0
+      },
+      "status": "completed",
+      "execution_time_ms": 45230
+    },
+    {
+      "id": "step_002",
+      "order": 2,
+      "module": "stack",
+      "name": "Sigma-Clipped Stack",
+      "inputs": [
+        { "name": "calibrated", "path": "processed/calibrated", "type": "folder" }
+      ],
+      "outputs": [
+        { "name": "stacked", "path": "processed/stacked.fits", "type": "file" }
+      ],
+      "parameters": {
+        "method": "sigma_clip",
+        "sigma": 3.0,
+        "iterations": 2
+      },
+      "status": "pending"
+    }
+  ],
+  "status": "ready"
+}
+```
+
+This transparency means:
+- Users understand every decision
+- Workflows are reproducible
+- Parameters can be manually edited if needed
+- Execution can resume from any step on failure
+
+## Technical Challenges
+
+### Dynamic Tool Registration
+
+**Problem:** Adding tools required code changes in multiple places  
+**Solution:** Convention-based registration
+
+I standardized tool structure:
+```
+tools/
+├── definitions/
+│   └── my_tool.yml          # Definition
+├── my_tool.py               # Implementation
+└── tool_loader.py           # Auto-discovery
+```
+
+The loader automatically:
+1. Scans `definitions/` for YAML files
+2. Validates schema with Pydantic
+3. Converts to OpenAI function format
+4. Maps tool calls to Python handlers
+
+Adding a new tool is 3 steps: write YAML, write handler, done.
+
+### Real-Time Execution Updates
+
+**Problem:** Users can't see long-running workflows  
+**Solution:** Server-Sent Events (SSE) for streaming
+
+I implemented bidirectional communication:
+
+**Backend SSE Endpoint:**
+```python
+@router.get("/projects/{project_id}/workflow/status")
+async def stream_workflow_status(project_id: str):
+    async def event_stream():
+        while workflow.status == "running":
+            status = get_workflow_status(project_id)
+            yield f"data: {json.dumps(status)}\n\n"
+            await asyncio.sleep(0.5)
+    
+    return EventSourceResponse(event_stream())
+```
+
+**Frontend Hook:**
+```typescript
+function useWorkflowExecution(projectId: string) {
+  const [status, setStatus] = useState<WorkflowStatus>()
+  
+  useEffect(() => {
+    const eventSource = new EventSource(
+      `/api/v1/projects/${projectId}/workflow/status`
+    )
+    
+    eventSource.onmessage = (event) => {
+      const update = JSON.parse(event.data)
+      setStatus(update)
+      
+      // Update specific step in UI
+      if (update.current_step) {
+        updateStepStatus(update.current_step, update.step_status)
+      }
+    }
+    
+    return () => eventSource.close()
+  }, [projectId])
+}
+```
+
+This gives users real-time feedback:
+- Which step is running
+- Progress percentage
+- Preview images as they're generated
+- Error messages if steps fail
+
+### Agent Context Management
+
+**Problem:** Agent needs full project context without token bloat  
+**Solution:** Structured context injection
+
+I built a context builder that includes only what's needed:
+
+```python
+def build_agent_context(project: Project, workflow: Workflow) -> str:
+    return f"""
+Current Project: {project.name}
+Object: {project.object_name}
+Files: {project.file_summary}
+
+Workflow Status: {workflow.status}
+Steps ({len(workflow.steps)} total):
+{format_step_summary(workflow.steps)}
+
+Last Execution: {workflow.last_executed_at or 'Never'}
+"""
+```
+
+This keeps token usage manageable while giving the agent full situational awareness.
+
+## Project-Based Organization
+
+Every imaging session is a self-contained project:
+
+```
+storage/projects/
+└── proj_m42_jan2025/
+    ├── project.json          # Metadata
+    ├── workflow.json         # Processing pipeline
+    ├── chat/
+    │   └── messages.json     # Conversation history
+    ├── raw/                  # Original files
+    │   ├── lights/
+    │   ├── darks/
+    │   └── bias/
+    └── processed/
+        ├── calibrated/
+        ├── stacked.fits
+        └── final.jpg
+```
+
+Benefits:
+- **Self-documenting**: Everything for one session in one place
+- **Reproducible**: Workflow + raw files = deterministic output
+- **Shareable**: Zip entire folder to share with others
+- **No database**: Projects are just files; easy backups
+
+## Impact & Learning
+
+This project taught me:
+- **Agentic design patterns**: Tool definitions, multi-agent systems, context management
+- **Real-time web architectures**: SSE, WebSockets, state synchronization
+- **Domain-driven design**: Workflow as first-class citizen, not an afterthought
+- **UX for AI products**: How to make AI decisions transparent and controllable
+
+It's also become my **actual astrophotography workflow**—I use Noxara to process my telescope images.
+
+## Future Directions
+
+**GPU Acceleration**  
+Integrate PyTorch models for:
+- Denoising (Noise2Noise architecture)
+- Super-resolution (ESRGAN for detail enhancement)
+- Star detection (YOLO for faster registration)
+
+**Workflow Templates**  
+Build a library of proven workflows:
+- "Deep Sky Object - narrowband"
+- "Planetary - RGB"
+- "Solar System - lucky imaging"
+
+Users start from templates, customize to their needs.
+
+**Cloud Processing**  
+Offload heavy computation:
+- S3 for raw file storage
+- Lambda/ECS for parallel processing
+- Redis for job queue
+
+This enables processing hundreds of GBs without local hardware limits.
+
+## Technology Stack
+
+**Backend:** Python 3.11, FastAPI, uvicorn, Pydantic  
+**Frontend:** Next.js 14, TypeScript, React, Tailwind CSS  
+**AI:** OpenAI GPT-4, function calling, structured outputs  
+**Image Processing:** Astropy (FITS), Pillow (JPEG conversion), NumPy  
+**Architecture:** Async Python, SSE streaming, modular tool system  
+**Storage:** JSON-based project files, local filesystem (S3 future)
+

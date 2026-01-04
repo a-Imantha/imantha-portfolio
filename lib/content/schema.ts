@@ -6,6 +6,7 @@ export const ProjectSchema = z.object({
   type: z.enum(['work', 'university', 'personal']),
   org: z.string(),
   period: z.string(),
+  periodStart: z.string(), // Format: YYYY-MM for sorting
   role: z.string(),
   tech: z.array(z.string()),
   links: z.array(z.object({

@@ -106,6 +106,8 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href="https://www.imantha.dev" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="any" />
+        <link rel="shortcut icon" href="/icon.png" />
         <meta name="theme-color" content="#3b82f6" />
       </head>
       <body className="antialiased">

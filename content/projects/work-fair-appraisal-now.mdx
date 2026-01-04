@@ -1,0 +1,68 @@
+---
+title: "Fair Appraisal Now - Property Tax Appeal System"
+slug: "work-fair-appraisal-now"
+type: "work"
+org: "CML Insights"
+period: "2023 - 2024"
+periodStart: "2023-01"
+role: "Machine Learning Engineering Lead"
+tech: ["python", "kubernetes", "postgres", "sklearn", "terraform", "gcp", "golang", "nextjs"]
+highlights:
+  - "Architected B2C application processing millions of property records"
+  - "Designed similarity matching algorithm combining categorical and numerical features"
+  - "Implemented weighted distance metrics: Hamming distance for categoricals, Euclidean for numericals"
+  - "Built scalable microservices on Kubernetes with automated CI/CD pipelines"
+  - "Delivered system helping homeowners save thousands in property taxes"
+heroImage: "/images/projects/fair-appraisal.png"
+images: []
+techNotes:
+  python: "Built ML pipelines for property similarity matching and data processing"
+  kubernetes: "Deployed microservices with auto-scaling based on user traffic"
+  postgres: "Designed schemas for county property data and user reports"
+  sklearn: "Implemented nearest neighbor search with custom distance metrics"
+  terraform: "Managed GCP infrastructure for production environments"
+  gcp: "Hosted on GKE with Cloud SQL and Cloud Storage for property data"
+  golang: "Built high-performance API services handling concurrent requests"
+  nextjs: "Developed frontend application with server-side rendering"
+---
+
+## Overview
+
+B2C platform that analyzes county property data to find comparable properties with lower valuations, generating appeal reports helping US homeowners save thousands on property taxes. Architected full stack from ML algorithms to production deployment serving 50+ counties.
+
+## Architecture
+
+Multi-layer system with specialized components:
+- **Frontend**: Next.js application with address autocomplete, comparison tables, and report generation
+- **API Gateway**: Golang services for high-performance property search and async PDF generation
+- **ML Engine**: Python pipelines for similarity matching and data processing
+- **Infrastructure**: Kubernetes on GCP with Terraform IaC and ArgoCD deployments
+
+## Key Technical Contributions
+
+### Hybrid Similarity Matching Algorithm
+Designed custom distance metric combining Hamming distance for categorical features (location, property type, construction quality) and weighted Euclidean distance for numerical features (square footage, lot size, age). Normalized to [0,1] range with county-specific α tuning based on local assessment methodology. Formula: `similarity = α * hamming + (1-α) * euclidean`.
+
+### Performance Optimization
+Reduced search time from 30+ seconds to <2 seconds through spatial indexing (KD-trees, ball-trees), pre-computed similarity matrices for common searches, and county-specific model weight caching. Implemented nearest neighbor search with scikit-learn optimized for property data characteristics.
+
+### Multi-County Data Pipeline
+Built ETL system handling diverse county formats (CSV, Excel, PDF scraping) with automated validation catching >90% errors, heuristic-based imputation for missing values, and pluggable parsers for rapid county onboarding. Enriched property data with geographic features (school districts, crime rates, market trends).
+
+### Scalable Architecture
+Microservices design isolating property search, report generation, and payments. Kubernetes horizontal pod autoscaling based on traffic patterns, PostgreSQL read replicas for report-heavy workloads, and CDN for static assets. Deployed with GitOps CI/CD ensuring zero-downtime updates.
+
+## Technologies
+
+- **Python**: Scikit-learn, Pandas, NumPy for ML pipelines
+- **Golang**: High-concurrency API services
+- **Next.js**: SSR frontend with TypeScript
+- **Kubernetes**: Microservices orchestration on GKE
+- **PostgreSQL**: Property data and user management
+- **Terraform**: Infrastructure as code
+- **GCP**: Cloud SQL, Cloud Storage, load balancing
+
+## Impact
+
+Average user saves $2,500 annually with 70%+ appeal success rate. Platform automates 95% of report generation with legal compliance for state-specific requirements. Supports 50+ counties processing millions of property records.
+
