@@ -1,0 +1,118 @@
+---
+title: "PLM: Physical Language Model for Chandra X-ray Source Analysis"
+slug: "astromind-plm-chandra"
+type: "work"
+org: "Astromind"
+period: "2024 - 2025"
+periodStart: "2024-01"
+role: "ML Engineer & Platform Architect"
+tech: ["nextjs", "python", "pytorch", "transformers", "mongodb", "runpod", "langchain", "langgraph"]
+links:
+  - label: "Astromind"
+    url: "https://astromind.org"
+highlights:
+  - "Led end-to-end development: fine-tuned models, FastAPI backend, multi-agent orchestration, Next.js frontend with interactive visualizations"
+  - "Architected multi-agent system with 5 specialized analysts using LangGraph, processing 50,000+ X-ray sources"
+  - "Built UMAP-based source explorer with real-time chat interface and streaming agent responses"
+  - "Implemented MongoDB vector search for neighbor analysis using 64D PCA embeddings with cosine similarity"
+  - "Developed comprehensive spectral analysis pipeline: energy quantiles, hardness ratios, variability metrics, light curves"
+heroImage: "/images/projects/astromind-pllm.png"
+images: []
+techNotes:
+  nextjs: "Frontend with UMAP visualization, light curve charts, streaming chat interface"
+  python: "FastAPI backend with multi-agent orchestration and astronomical data processing"
+  pytorch: "Fine-tuned Qwen-7B on X-ray event data embeddings"
+  transformers: "Base LLM infrastructure and training utilities"
+  mongodb: "Source catalog storage with vector search indices for embeddings"
+  runpod: "GPU infrastructure for model fine-tuning and inference"
+  langchain: "LLM integration and tool chaining framework"
+  langgraph: "Multi-agent workflow orchestration with streaming updates"
+---
+
+## Overview
+
+PLM (Physical Language Model) is a production chat-based application enabling astrophysicists to analyze raw X-ray event data from the Chandra Source Catalog through natural language. I led the **end-to-end development** of the entire system: fine-tuning models on 50,000+ sources, building the FastAPI backend with multi-agent orchestration, implementing MongoDB vector search, and creating an interactive Next.js frontend with UMAP visualization and real-time streaming chat.
+
+## System Architecture
+
+**Backend:** FastAPI (Python) with multi-agent workflow orchestration  
+**Frontend:** Next.js 14 with React, TypeScript, TailwindCSS, D3.js visualizations  
+**Database:** MongoDB with vector search indices for 64D PCA embeddings  
+**ML Infrastructure:** RunPod GPUs for fine-tuning Qwen-7B on X-ray event data
+
+### Data Pipeline
+Each X-ray source contains photon arrival times and energies. I built a comprehensive processing pipeline that:
+- Computes 64D PCA embeddings from event data for similarity search
+- Generates 2D UMAP projections for interactive visualization
+- Calculates spectral features: energy quantiles, hardness ratios in standard bands (soft, medium, hard)
+- Analyzes variability: K-S tests, Fano factors, Gregory-Loredo light curves at multiple cadences
+- Detects emission lines and performs spectral model fits (power-law, blackbody, APEC)
+
+## Multi-Agent Architecture
+
+Built with LangGraph, the system orchestrates 5 specialized agents with streaming progress updates:
+
+### 1. Event Analyst (Fine-tuned Qwen-7B)
+I fine-tuned Qwen-7B on 50,000 X-ray sources to directly interpret raw photon event data. The model learned to classify sources (AGN, stars, SNR, galaxies) and identify variability patterns from time-energy sequences without traditional text inputs.
+
+### 2. Metadata Analyst (GPT-4/GPT-5)
+Analyzes computed spectral features and astrophysical metadata. Rather than fine-tuning on raw data, I translate event data into standardized metrics (hardness ratios, light curves, model fit parameters)—the same approach a professional astrophysicist would use—enabling enterprise LLMs to provide expert-level physical reasoning.
+
+### 3. Neighbor Analyst (GPT-4/GPT-5 + MongoDB Vector Search)
+I implemented MongoDB vector search with cosine similarity on 64D PCA embeddings to find the 10 most similar sources. The analyst compares spectral properties of neighbors, leverages known classifications, and provides comparative context. This "wisdom of the crowd" approach significantly improves classification confidence.
+
+### 4. Tool Analyst (Multi-wavelength Imaging)
+Provides LLM-accessible tools, primarily hips2fits for querying multi-wavelength imagery (infrared, optical, X-ray) at varying fields of view. The LLM autonomously queries images of the surrounding region to understand spatial and spectral context.
+
+### 5. Critic Agent (Cross-validation)
+Synthesizes all agent outputs, identifies agreements and disagreements, evaluates evidence strength, and assesses overall confidence. Provides critical review ensuring physically plausible conclusions.
+
+### 6. Conversation Moderator (Final Synthesis)
+Produces the final response in either "Normal" (conversational) or "Advanced" (structured with explicit reasoning sections) modes, synthesizing all analyses into a coherent answer.
+
+## Technical Implementation
+
+### Backend Architecture (FastAPI + LangGraph)
+- Built FastAPI service handling multi-agent workflow orchestration
+- Implemented streaming responses with Server-Sent Events (SSE) for real-time agent progress updates
+- Integrated fine-tuned Qwen-7B model serving via HTTP endpoints
+- Developed comprehensive spectral analysis module: energy quantiles, hardness ratios, variability metrics (K-S test, Fano factor, excess variance), periodicity analysis (Rayleigh test, FFT PSD)
+- Created Gregory-Loredo Bayesian Blocks implementation for piecewise-constant light curve analysis
+
+### Frontend Implementation (Next.js + React)
+- **UMAP Visualization**: Interactive SVG-based scatter plot with zoom/pan, displaying all 50,000+ sources color-coded by type, with nearest neighbor connections
+- **Chat Interface**: Real-time streaming chat with markdown rendering, agent progress indicators, message history persistence
+- **Light Curve Charts**: D3.js visualizations for fixed-cadence (100s, 500s, 2000s) and Gregory-Loredo light curves with error bars and credible intervals
+- **Dataset Explorer**: Browse and filter sources, upload custom event data, search by properties
+- **Responsive Design**: Three-panel layout (dataset explorer, UMAP, chat) with dark mode support
+
+### MongoDB Integration
+- Designed schema for 50,000+ X-ray sources with event data, embeddings, and metadata
+- Implemented vector search index on `pca_64d` field for cosine similarity queries
+- Built upload pipeline with automatic embedding generation and validation
+- Handled sources with <8h observation windows gracefully (metadata-only analysis)
+
+### Model Fine-tuning (PyTorch + Transformers)
+- Fine-tuned Qwen-7B on 50,000 sources using custom encoder architecture (Flamingo-style) to bridge time-series event data to LLM embedding space
+- Trained on Q&A pairs about source properties, classifications, and variability
+- Deployed model on RunPod GPU infrastructure with HTTP serving for inference
+
+## Technologies
+
+**Frontend:** Next.js 14, React 18, TypeScript, TailwindCSS, D3.js, SVG visualizations  
+**Backend:** FastAPI (Python), LangChain, LangGraph, NumPy/SciPy  
+**ML:** PyTorch, Transformers, Qwen-7B fine-tuning, OpenAI GPT-4/GPT-5  
+**Data:** MongoDB with vector search, Pinecone (alternative vector DB)  
+**Infrastructure:** RunPod (GPU), Docker, HTTP microservices
+
+## Impact
+
+Enables astrophysicists to rapidly analyze X-ray sources through conversational AI, significantly reducing analysis time from hours to minutes. The system combines strengths of specialized fine-tuned models (pattern recognition from 50,000+ sources) with general-purpose LLMs (physical reasoning) and automated computational pipelines (standardized metrics), providing comprehensive multi-perspective analysis with confidence assessments.
+
+**Key Contributions:**
+- End-to-end implementation from model training to production deployment
+- Novel approach translating raw astronomical data into LLM-understandable metrics
+- Interactive visualization system enabling exploration of 50,000+ sources
+- Real-time multi-agent orchestration with streaming progress updates
+
+

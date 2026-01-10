@@ -1,0 +1,59 @@
+---
+title: "AWS Security Audit Tool"
+slug: "work-ifs-aws-security-audit"
+type: "work"
+org: "IFS R&D International"
+period: "2021"
+periodStart: "2021-01"
+role: "Software Engineer"
+tech: ["python", "aws"]
+highlights:
+  - "Serverless security auditing tool for AWS IAM and account security"
+  - "IAM policy analysis and MFA enforcement monitoring"
+  - "Unused account detection through last login tracking"
+  - "Extensible framework for adding custom security checks"
+links:
+  - label: "View on GitHub"
+    url: "https://github.com/a-Imantha/aws-security-audit"
+heroImage: "/images/projects/ifs_security_audit.png"
+images: []
+techNotes:
+  python: "Lambda functions for security checks and report generation"
+  aws: "Serverless architecture using Lambda, EventBridge, SES, and CloudFormation"
+---
+
+## Overview
+
+A serverless AWS security auditing tool that scans AWS environments for IAM security issues and inactive accounts. Built with Python and AWS Lambda to automate routine security checks and notify relevant parties via email.
+
+## Key Features
+
+### IAM Security Analysis
+- **Policy Analysis:** Scans IAM policies for overprivileged access and risky permissions
+- **MFA Enforcement:** Monitors MFA status across all IAM users
+- **Unused Accounts:** Detects inactive accounts through last login tracking
+- **Email Notifications:** Sends security reports to relevant stakeholders via AWS SES
+
+### Extensible Design
+- Modular architecture allowing easy addition of new security checks
+- Plugin-style test framework for custom audit rules
+- Configuration-driven scan definitions
+
+## Architecture
+
+Built as a serverless application using AWS Lambda and Python. EventBridge triggers scheduled scans, Lambda functions execute security checks using Boto3, and results are emailed via SES. Infrastructure deployed with CloudFormation/SAM templates.
+
+## Impact
+
+- Automated IAM security auditing across multiple AWS accounts at IFS
+- Reduced manual security review time from hours to minutes
+- Identified unused accounts and MFA gaps proactively across engineering teams
+- Enhanced AWS security posture through automated monitoring
+
+## Technologies
+
+**Cloud:** AWS Lambda, EventBridge, SES, S3, CloudFormation, SAM  
+**Language:** Python 3.9+  
+**Libraries:** Boto3, Jinja2 (report templates)  
+**Tools:** AWS CLI, SAM CLI
+
