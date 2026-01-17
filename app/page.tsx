@@ -1,6 +1,7 @@
 import { Header } from '@/components/header/Header';
 import { Footer } from '@/components/footer/Footer';
 import { HeroSection } from '@/components/sections/HeroSection';
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { EducationSection } from '@/components/sections/EducationSection';
 import { ExperienceSection } from '@/components/sections/ExperienceSection';
 import { ProjectsSection } from '@/components/sections/ProjectsSection';
@@ -81,6 +82,7 @@ export default async function HomePage() {
       <Header />
       <main>
         <HeroSection />
+        <TestimonialsSection />
         <EducationSection />
         <ExperienceSection />
         <ProjectsSection projects={projects} />

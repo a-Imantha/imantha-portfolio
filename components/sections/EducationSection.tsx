@@ -15,7 +15,7 @@ export function EducationSection() {
       period: '2021 - 2024',
       specialization: 'Data Science and Machine Learning',
       gpa: '3.9',
-      grade: 'A',
+      achievement: "Dean's List in 3 Semesters",
       highlight: true,
       description: 'Advanced study in machine learning, data science, and AI with focus on explainable AI for weather prediction.',
       modules: [
